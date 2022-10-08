@@ -14,38 +14,42 @@ Login
             <div class="card-body">
                 <p class="login-box-msg">{{ __('Masuk untuk menggunakan Sistem') }}</p>
 
-                <form action="{{ route('login') }}" method="post">
+                <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control @error('username') is-invalid @enderror" placeholder="Username">
+                        <input id="username" type="text" class="form-control @error('username') is-invalid @enderror"
+                            name="username" value="{{ old('username') }}" tabindex="1" autocomplete="username" autofocus placeholder="username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
                         @error('username')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                        <span class="error invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password">
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" 
+                            name="password" autocomplete="current-password" tabindex="2" placeholder="password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
                         @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                        <span class="error invalid-feedback">
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
+                                {{-- <input type="checkbox" name="remember" class="custom-control-input" tabindex="3"
+                                    id="remember" {{ old('remember') ? 'checked' : '' }}> --}}
+                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                 <label for="remember">
                                     {{ __('Ingat Saya') }}
                                 </label>

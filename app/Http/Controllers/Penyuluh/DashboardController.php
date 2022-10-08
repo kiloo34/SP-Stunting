@@ -9,6 +9,11 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        # code...
+        return view('penyuluh.dashboard', [
+            'title' => 'dashboard',
+            'subtitle' => '',
+            'data' => '',
+            'active' => 'dashboard',
+        ]);
     }
 }

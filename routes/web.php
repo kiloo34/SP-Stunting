@@ -34,7 +34,7 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::group([
         'prefix' => '/penyuluh',
-        'middleware' => ['role:penyuluh'],
+        'middleware' => ['role:Penyuluh'],
     ], function () {
         // Dashboard Route
         Route::get('/dashboard', [PenyuluhDashboard::class, 'index'])->name('penyuluh.dashboard');
@@ -42,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
     
     Route::group([
         'prefix' => '/bidan',
-        'middleware' => ['role:bidan'],
+        'middleware' => ['role:Bidan'],
     ], function () {
         // Dashboard Route
         Route::get('/dashboard', [BidanDashboard::class, 'index'])->name('bidan.dashboard');
@@ -50,7 +50,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group([
         'prefix' => '/pkk',
-        'middleware' => ['role:pkk'],
+        'middleware' => ['role:PKK'],
     ], function () {
         // Dashboard Route
         Route::get('/dashboard', [PKKDashboard::class, 'index'])->name('pkk.dashboard');
@@ -58,7 +58,7 @@ Route::middleware(['auth'])->group(function () {
     
     Route::group([
         'prefix' => '/kader',
-        'middleware' => ['role:kader'],
+        'middleware' => ['role:Kader'],
     ], function () {
         // Dashboard Route
         Route::get('/dashboard', [KaderDashboard::class, 'index'])->name('kader.dashboard');

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Penyuluh;
+namespace App\Http\Controllers\Bidan;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -16,7 +16,7 @@ class CatinController extends Controller
      */
     public function index()
     {
-        return view('penyuluh.catin.index', [
+        return view('bidan.catin.index', [
             'title' => 'catin',
             'subtitle' => '',
             'active' => 'catin',
@@ -129,14 +129,8 @@ class CatinController extends Controller
                 ->addColumn('action', function($row){
                     $actionBtn = '
                         <div class="btn-group btn-group-sm">
-                            <a href="#" class="btn btn-info">
-                                <i class="fas fa-eye"></i>
-                            </a>
                             <a href="#" class="btn btn-primary">
                                 <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="#" class="btn btn-danger">
-                                <i class="fas fa-trash"></i>
                             </a>
                         </div>';
                     return $actionBtn;

@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             VillageSeeder::class,
             UserSeeder::class,
+            CatinStatusSeeder::class,
             CatinSeeder::class,
         ]);
     }

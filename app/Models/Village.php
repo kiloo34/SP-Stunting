@@ -16,8 +16,23 @@ class Village extends Model
         'name'
     ];
 
+    /**
+     * Get the user associated with the Village
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function user()
     {
-        return $this->hasOne('App\Models\User');
+        return $this->hasOne(User::class);
+    }
+
+    /**
+     * Get the catin associated with the Village
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function catin()
+    {
+        return $this->hasOne(Catin::class);
     }
 }

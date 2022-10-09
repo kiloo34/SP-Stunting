@@ -20,9 +20,6 @@
                 Home
             </a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contact</a>
-        </li>
     </ul>
 
     <!-- Right navbar links -->
@@ -32,11 +29,6 @@
                 <i class="fas fa-expand-arrows-alt"></i>
             </a>
         </li>
-        {{-- <li class="nav-item">
-            <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
-                <i class="fas fa-th-large"></i>
-            </a>git 
-        </li> --}}
     </ul>
-  </nav>
-  <!-- /.navbar -->
+</nav>
+<!-- /.navbar -->

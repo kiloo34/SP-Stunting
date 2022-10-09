@@ -30,7 +30,11 @@ class CatinController extends Controller
      */
     public function create()
     {
-        //
+        return view('penyuluh.catin.create', [
+            'title' => 'catin',
+            'subtitle' => 'create',
+            'active' => 'catin',
+        ]);
     }
 
     /**

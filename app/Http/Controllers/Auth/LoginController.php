@@ -37,7 +37,7 @@ class LoginController extends Controller
             'Bidan'     => 'bidan',
             'Kader'     => 'kader',
         ];
-        return $this->redirectTo = route($for[auth()->user()->role->name] . ".dashboard");
+        return $this->redirectTo = route($for[auth()->user()->role->name] . ".dashboard.index");
     }
 
     public function username()

@@ -7,13 +7,13 @@
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             @if (auth()->user()->role->name == 'Penyuluh')
-            <a href="{{ route('penyuluh.dashboard') }}" class="nav-link">
+            <a href="{{ route('penyuluh.dashboard.index') }}" class="nav-link">
             @elseif (auth()->user()->role->name == 'Bidan')
-            <a href="{{ route('bidan.dashboard') }}" class="nav-link">
+            <a href="{{ route('bidan.dashboard.index') }}" class="nav-link">
             @elseif (auth()->user()->role->name == 'PKK')
-            <a href="{{ route('pkk.dashboard') }}" class="nav-link">
+            <a href="{{ route('pkk.dashboard.index') }}" class="nav-link">
             @elseif (auth()->user()->role->name == 'Kader')
-            <a href="{{ route('kader.dashboard') }}" class="nav-link">
+            <a href="{{ route('kader.dashboard.index') }}" class="nav-link">
             @else
             <a href="#" class="nav-link">
             @endif

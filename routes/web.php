@@ -41,7 +41,7 @@ Route::middleware(['auth'])->group(function () {
         'middleware' => ['role:Penyuluh'],
     ], function () {
         // Dashboard Route
-        Route::get('/dashboard', [PenyuluhDashboard::class, 'index'])->name('penyuluh.dashboard');
+        Route::get('/dashboard', [PenyuluhDashboard::class, 'index'])->name('penyuluh.dashboard.index');
         
         // Catin Route
         // Basic Route
@@ -57,7 +57,7 @@ Route::middleware(['auth'])->group(function () {
         'middleware' => ['role:Bidan'],
     ], function () {
         // Dashboard Route
-        Route::get('/dashboard', [BidanDashboard::class, 'index'])->name('bidan.dashboard');
+        Route::get('/dashboard', [BidanDashboard::class, 'index'])->name('bidan.dashboard.index');
         
         // Catin Route
         // Basic Route
@@ -73,7 +73,7 @@ Route::middleware(['auth'])->group(function () {
         'middleware' => ['role:PKK'],
     ], function () {
         // Dashboard Route
-        Route::get('/dashboard', [PKKDashboard::class, 'index'])->name('pkk.dashboard');
+        Route::get('/dashboard', [PKKDashboard::class, 'index'])->name('pkk.dashboard.index');
         
         // Catin Route
         // Basic Route
@@ -87,7 +87,7 @@ Route::middleware(['auth'])->group(function () {
         'middleware' => ['role:Kader'],
     ], function () {
         // Dashboard Route
-        Route::get('/dashboard', [KaderDashboard::class, 'index'])->name('kader.dashboard');
+        Route::get('/dashboard', [KaderDashboard::class, 'index'])->name('kader.dashboard.index');
         
         // Catin Route
         // Basic Route

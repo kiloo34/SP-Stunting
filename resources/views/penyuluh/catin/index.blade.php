@@ -12,6 +12,12 @@
                     <h3 class="card-title">
                         {{__('List Data')}} {{ucfirst($title)}}
                     </h3>
+                    <div class="card-tools">
+                        <a href="{{ route('penyuluh.catin.create') }}" class="btn btn-success btn-sm">
+                            <i class="fas fa-plus"></i>
+                            {{__('Tambah Data')}} {{ucfirst($title)}}
+                        </a>
+                    </div>
                 </div>
                 <div class="card_body">
                     <div class="col-12 p-3">
@@ -37,28 +43,7 @@
 @endsection
 @push('scripts')
     <script>
-        // var table = $('#catin_table').DataTable({
-        //     "language": {
-        //         "emptyTable": "Data Obat Kosong"
-        //     },
-        //     "processing": true,
-        //     "serverSide": true,
-        //     "ajax": {
-        //         "url": "{{ route('penyuluh.getDataCatin') }}",
-        //         "columns": [
-        //             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-        //             {data: 'name', name: 'name'},
-        //             {data: 'nik', name: 'nik'},
-        //             {data: 'desa', name: 'desa'},
-        //             {data: 'alamat', name: 'alamat'},
-        //             {data: 'no_hp', name: 'no_hp'},
-        //             {data: 'no_hp', name: 'no_hp'},
-        //         ],
-        //     }
-        // });
         $(document).ready(function() {
-            // table.draw()
-
             $('#catin_table').DataTable({
                 "language": {
                     "emptyTable": "Data Catin Kosong"

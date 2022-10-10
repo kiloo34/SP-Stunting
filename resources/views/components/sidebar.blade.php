@@ -2,13 +2,13 @@
 <aside class="main-sidebar sidebar-dark-lightblue elevation-4">
     <!-- Brand Logo -->
     @if (auth()->user()->role->name == 'Penyuluh')
-    <a href="{{ route('penyuluh.dashboard') }}" class="brand-link">
+    <a href="{{ route('penyuluh.dashboard.index') }}" class="brand-link">
     @elseif (auth()->user()->role->name == 'Bidan')
-    <a href="{{ route('bidan.dashboard') }}" class="brand-link">
+    <a href="{{ route('bidan.dashboard.index') }}" class="brand-link">
     @elseif (auth()->user()->role->name == 'PKK')
-    <a href="{{ route('pkk.dashboard') }}" class="brand-link">
+    <a href="{{ route('pkk.dashboard.index') }}" class="brand-link">
     @elseif (auth()->user()->role->name == 'Kader')
-    <a href="{{ route('kader.dashboard') }}" class="brand-link">
+    <a href="{{ route('kader.dashboard.index') }}" class="brand-link">
     @else
     <a href="#" class="brand-link">
     @endif
@@ -36,13 +36,13 @@
                 <li class="nav-header">Dashboard</li>
                 <li class="nav-item">
                     @if (auth()->user()->role->name == 'Penyuluh')
-                    <a href="{{ route('penyuluh.dashboard') }}" class="nav-link {{ $active == 'dashboard' ? 'active' : '' }}">
+                    <a href="{{ route('penyuluh.dashboard.index') }}" class="nav-link {{ $active == 'dashboard' ? 'active' : '' }}">
                     @elseif (auth()->user()->role->name == 'Bidan')
-                    <a href="{{ route('bidan.dashboard') }}" class="nav-link {{ $active == 'dashboard' ? 'active' : '' }}">
+                    <a href="{{ route('bidan.dashboard.index') }}" class="nav-link {{ $active == 'dashboard' ? 'active' : '' }}">
                     @elseif (auth()->user()->role->name == 'PKK')
-                    <a href="{{ route('pkk.dashboard') }}" class="nav-link {{ $active == 'dashboard' ? 'active' : '' }}">
+                    <a href="{{ route('pkk.dashboard.index') }}" class="nav-link {{ $active == 'dashboard' ? 'active' : '' }}">
                     @elseif (auth()->user()->role->name == 'Kader')
-                    <a href="{{ route('kader.dashboard') }}" class="nav-link {{ $active == 'dashboard' ? 'active' : '' }}">
+                    <a href="{{ route('kader.dashboard.index') }}" class="nav-link {{ $active == 'dashboard' ? 'active' : '' }}">
                     @else
                     <a href="#" class="nav-link {{ $active == 'dashboard' ? 'active' : '' }}">
                     @endif

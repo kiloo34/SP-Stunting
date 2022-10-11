@@ -46,7 +46,6 @@
                     @else
                     <a href="#" class="nav-link {{ $active == 'dashboard' ? 'active' : '' }}">
                     @endif
-                    {{-- <a href="" class="nav-link"> --}}
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>{{__('Dashboard')}}</p>
                     </a>
@@ -54,14 +53,32 @@
                 <li class="nav-header">Main Menu</li>
                 @if (auth()->user()->role->name == 'Penyuluh')
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('penyuluh.catin.index') }}" class="nav-link {{ $active == 'catin' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>{{__('Catin')}}</p>
                     </a>
                 </li>
                 @elseif (auth()->user()->role->name == 'Bidan')
+                <li class="nav-item">
+                    <a href="{{ route('bidan.catin.index') }}" class="nav-link {{ $active == 'catin' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>{{__('Catin')}}</p>
+                    </a>
+                </li>
                 @elseif (auth()->user()->role->name == 'PKK')
+                <li class="nav-item">
+                    <a href="{{ route('pkk.catin.index') }}" class="nav-link {{ $active == 'catin' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>{{__('Catin')}}</p>
+                    </a>
+                </li>
                 @elseif (auth()->user()->role->name == 'Kader')
+                <li class="nav-item">
+                    <a href="{{ route('kader.catin.index') }}" class="nav-link {{ $active == 'catin' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>{{__('Catin')}}</p>
+                    </a>
+                </li>
                 @endif
                 <li class="nav-header">Settings</li>
                 <li class="nav-item">

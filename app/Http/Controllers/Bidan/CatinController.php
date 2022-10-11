@@ -1,16 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Penyuluh;
+namespace App\Http\Controllers\Bidan;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\Models\Catin;
-use App\Models\CatinStatus;
-use App\Models\Village;
-
-use App\Http\Requests\CatinRequest;
-
 use Yajra\DataTables\DataTables;
 
 class CatinController extends Controller
@@ -22,7 +16,7 @@ class CatinController extends Controller
      */
     public function index()
     {
-        return view('penyuluh.catin.index', [
+        return view('bidan.catin.index', [
             'title' => 'catin',
             'subtitle' => '',
             'active' => 'catin',
@@ -36,11 +30,7 @@ class CatinController extends Controller
      */
     public function create()
     {
-        return view('penyuluh.catin.create', [
-            'title' => 'catin',
-            'subtitle' => 'create',
-            'active' => 'catin',
-        ]);
+        //
     }
 
     /**
@@ -49,21 +39,9 @@ class CatinController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CatinRequest $request)
+    public function store(Request $request)
     {
-        $catin = new Catin;
-        
-        $catin->name = $request->name;
-        $catin->nik = $request->nik;
-        $catin->no_hp = $request->no_hp;
-        $catin->age = $request->age;
-        $catin->address = $request->alamat;
-        $catin->village_id = $request->village;
-        $catin->status_id = $request->status;
-        $catin->save();
-
-        // Catin::create($request->all());
-        return redirect()->route('penyuluh.catin.index')->with('success', 'Data Calon Pengantin ' . $request->name .' berhasil ditambah');
+        //
     }
 
     /**
@@ -83,16 +61,9 @@ class CatinController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Catin $catin)
+    public function edit($id)
     {
-        // dd($id);
-        // dd($catin);
-        return view('penyuluh.catin.edit', [
-            'title' => 'catin',
-            'subtitle' => 'edit',
-            'catin' => $catin,
-            'active' => 'catin',
-        ]);
+        //
     }
 
     /**
@@ -158,44 +129,14 @@ class CatinController extends Controller
                 ->addColumn('action', function($row){
                     $actionBtn = '
                         <div class="btn-group btn-group-sm">
-                            <a href="#" class="btn btn-info">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            <a href="'.route("penyuluh.catin.edit", $row->id).'" class="btn btn-primary">
+                            <a href="#" class="btn btn-primary">
                                 <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="#" class="btn btn-danger">
-                                <i class="fas fa-trash"></i>
                             </a>
                         </div>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
-        } else {
-            return response()->json(['text'=>'only ajax request']);
-        }
-    }
-
-    public function getDataCatinDesa(Request $request)
-    {
-        if($request->ajax()) {
-            $data = Village::all();
-            return response()->json([
-                'data' => $data
-            ]);
-        } else {
-            return response()->json(['text'=>'only ajax request']);
-        }
-    }
-
-    public function getDataCatinStatus(Request $request)
-    {
-        if($request->ajax()) {
-            $data = CatinStatus::all();
-            return response()->json([
-                'data' => $data
-            ]);
         } else {
             return response()->json(['text'=>'only ajax request']);
         }

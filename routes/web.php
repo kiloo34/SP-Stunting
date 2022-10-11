@@ -50,6 +50,8 @@ Route::middleware(['auth'])->group(function () {
         ]);
         // Data Route
         Route::get('ajax/catin', [PenyuluhCatin::class, 'getDataCatin'])->name('penyuluh.getDataCatin');
+        Route::get('ajax/catin/desa', [PenyuluhCatin::class, 'getDataCatinDesa'])->name('penyuluh.getDataCatinDesa');
+        Route::get('ajax/catin/status', [PenyuluhCatin::class, 'getDataCatinStatus'])->name('penyuluh.getDataCatinStatus');
     });
     
     Route::group([

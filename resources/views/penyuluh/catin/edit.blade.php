@@ -11,13 +11,13 @@
                     {{ucfirst($subtitle)}} {{__('Data')}} {{ucfirst($title)}}
                 </h3>
             </div>
-            <form action="{{ route('penyuluh.catin.store') }}" class="form-horizontal" method="post">
+            <form action="#" class="form-horizontal" method="post">
                 @csrf
                 <div class="card-body">
                     <div class="form-group row">
                         <label for="catinName" class="col-sm-2 col-form-label">{{__('Nama')}}</label>
                         <div class="col-sm-10">
-                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="catinName" placeholder="Nama Calon Pengantin" value="{{ old('name') }}">
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="catinName" placeholder="Nama Calon Pengantin" value="{{ $catin->name }}">
                             @error('name')
                             <span class="error invalid-feedback">
                                 <strong>{{ $message }}</strong>
@@ -28,7 +28,7 @@
                     <div class="form-group row">
                         <label for="catinNIK" class="col-sm-2 col-form-label">{{__('NIK')}}</label>
                         <div class="col-sm-10">
-                            <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror" id="catinNIK" placeholder="NIK" value="{{ old('nik') }}">
+                            <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror" id="catinNIK" placeholder="NIK" value="{{ $catin->nik }}">
                             @error('nik')
                             <span class="error invalid-feedback">
                                 <strong>{{ $message }}</strong>
@@ -39,7 +39,7 @@
                     <div class="form-group row">
                         <label for="catinUmur" class="col-sm-2 col-form-label">{{__('Umur')}}</label>
                         <div class="col-sm-10">
-                            <input type="text" name="age" class="form-control @error('age') is-invalid @enderror" id="catinUmur" placeholder="Umur" value="{{ old('age') }}">
+                            <input type="text" name="age" class="form-control @error('age') is-invalid @enderror" id="catinUmur" placeholder="Umur" value="{{ $catin->age }}">
                             @error('age')
                             <span class="error invalid-feedback">
                                 <strong>{{ $message }}</strong>
@@ -50,7 +50,7 @@
                     <div class="form-group row">
                         <label for="catinNo_hp" class="col-sm-2 col-form-label">{{__('No Handphone')}}</label>
                         <div class="col-sm-10">
-                            <input type="text" name="no_hp" class="form-control @error('no_hp') is-invalid @enderror" id="catinNo_hp" placeholder="No Handphone" value="{{ old('no_hp') }}">
+                            <input type="text" name="no_hp" class="form-control @error('no_hp') is-invalid @enderror" id="catinNo_hp" placeholder="No Handphone" value="{{ $catin->no_hp }}">
                             @error('no_hp')
                             <span class="error invalid-feedback">
                                 <strong>{{ $message }}</strong>
@@ -61,7 +61,7 @@
                     <div class="form-group row">
                         <label for="catinAlamat" class="col-sm-2 col-form-label">{{__('Alamat')}}</label>
                         <div class="col-sm-10">
-                            <textarea name="alamat" id="catinAlamat" class="form-control @error('alamat') is-invalid @enderror" rows="5"></textarea>
+                            <textarea name="alamat" id="catinAlamat" class="form-control @error('alamat') is-invalid @enderror" rows="5" value="{{ $catin->address }}"></textarea>
                             @error('alamat')
                             <span class="error invalid-feedback">
                                 <strong>{{ $message }}</strong>
@@ -72,7 +72,7 @@
                     <div class="form-group row">
                         <label for="catinDesa" class="col-sm-2 col-form-label">{{__('Desa')}}</label>
                         <div class="col-sm-10">
-                            <select name="village" class="form-control @error('village') is-invalid @enderror" id="catinDesa"></select>
+                            <select name="village" class="form-control @error('village') is-invalid @enderror" id="catinDesa" disabled></select>
                             @error('village')
                             <span class="error invalid-feedback">
                                 <strong>{{ $message }}</strong>
@@ -83,7 +83,7 @@
                     <div class="form-group row">
                         <label for="catinStatus" class="col-sm-2 col-form-label">{{__('Status')}}</label>
                         <div class="col-sm-10">
-                            <select name="status" class="form-control @error('status') is-invalid @enderror" id="catinStatus"></select>
+                            <select name="status" class="form-control @error('status') is-invalid @enderror" id="catinStatus" disabled></select>
                             @error('status')
                             <span class="error invalid-feedback">
                                 <strong>{{ $message }}</strong>
@@ -93,7 +93,6 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="{{ route('penyuluh.catin.index') }}" class="btn btn-danger btn-sm">Kembali</a>
                     <button type="submit" class="btn btn-success btn-sm float-right">{{__('Tambah Data')}}</button>
                 </div>
             </form>

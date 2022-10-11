@@ -29,6 +29,11 @@
 
                 <section class="content">
                     <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                @include('components.success')
+                            </div> 
+                        </div>
                         @yield('content')
                     </div>
                 </section>            

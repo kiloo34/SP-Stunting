@@ -38,7 +38,7 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item active">
-                        @if (auth()->user()->role->name == 'Penyuluh')
+                        {{-- @if (auth()->user()->role->name == 'Penyuluh')
                         <a href="{{ route('penyuluh.'.$title.'.'.$subtitle) }}">    
                         @elseif (auth()->user()->role->name == 'Bidan')
                         <a href="{{ route('bidan.'.$title.'.'.$subtitle) }}">
@@ -46,9 +46,8 @@
                         <a href="{{ route('pkk.'.$title.'.'.$subtitle) }}">
                         @elseif (auth()->user()->role->name == 'Kader')
                         <a href="{{ route('kader.'.$title.'.'.$subtitle) }}">
-                        @else
+                        @else --}}
                         <a href="#">
-                        @endif
                             {{ucfirst($subtitle)}}
                         </a>
                     </li>

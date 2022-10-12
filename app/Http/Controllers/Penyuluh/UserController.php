@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\Penyuluh;
 
 use App\Http\Controllers\Controller;
+
+use App\Models\User;
+
+use Yajra\DataTables\DataTables;
+
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -14,7 +19,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('penyuluh.user.index', [
+            'title' => 'user',
+            'subtitle' => '',
+            'active' => 'user',
+        ]);
     }
 
     /**
@@ -81,5 +90,65 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getDataUser(Request $request)
+    {
+        if($request->ajax()) {
+            $data = User::with('desa', 'role')
+                        ->whereIn('role_id', [2,3,4])
+                        ->get();
+            
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('name', function($row){
+                    $name = '';
+                    $name = $row->name;
+                    return $name;
+                })
+                ->addColumn('nik', function($row){
+                    $nik = $row->nik != null ? $row->nik : '-';
+                    return $nik;
+                })
+                ->addColumn('village', function($row){
+                    $village = $row->desa->name != null ? $row->desa->name : '-' ;
+                    return $village;
+                })
+                ->addColumn('address', function($row){
+                    $address = $row->address != null ? $row->address : '-';
+                    return $address;
+                })
+                ->addColumn('no_hp', function($row){
+                    $no_hp = $row->no_hp != null ? $row->no_hp : '-';
+                    return $no_hp;
+                })
+                ->addColumn('username', function($row){
+                    $username = $row->username != null ? $row->username : '-';
+                    return $username;
+                })
+                ->addColumn('role', function($row){
+                    $username = $row->role->name != null ? $row->role->name : '-';
+                    return $username;
+                })
+                ->addColumn('action', function($row){
+                    $actionBtn = '
+                        <div class="btn-group btn-group-sm">
+                            <a href="'.route("penyuluh.user.show", $row->id).'" class="btn btn-info">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="'.route("penyuluh.user.edit", $row->id).'" class="btn btn-primary">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        } else {
+            return response()->json(['text'=>'only ajax request']);
+        }
     }
 }

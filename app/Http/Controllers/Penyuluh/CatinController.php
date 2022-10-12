@@ -9,7 +9,7 @@ use App\Models\Catin;
 use App\Models\CatinStatus;
 use App\Models\Village;
 
-use App\Http\Requests\CatinRequest;
+use App\Http\Requests\Penyuluh\CatinRequest;
 
 use Yajra\DataTables\DataTables;
 

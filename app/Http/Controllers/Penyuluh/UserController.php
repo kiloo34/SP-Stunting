@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Penyuluh;
 use App\Http\Controllers\Controller;
 
 use App\Models\User;
+use App\Models\Role;
+use App\Models\Village;
+
+use App\Http\Requests\Penyuluh\UserRequest;
 
 use Yajra\DataTables\DataTables;
 
@@ -33,7 +37,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('penyuluh.user.create', [
+            'title' => 'user',
+            'subtitle' => 'create',
+            'active' => 'user',
+        ]);
     }
 
     /**
@@ -42,9 +50,22 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $user = new User;
+        
+        $user->name = $request->name;
+        $user->username = $request->name.rand(pow(10, 3-1), pow(10, 3)-1);
+        $user->password = bcrypt('12345678');
+        $user->nik = $request->nik;
+        $user->no_hp = $request->no_hp;
+        $user->address = $request->alamat;
+        $user->village_id = $request->village;
+        $user->role_id = $request->role;
+        $user->save();
+
+        // Catin::create($request->all());
+        return redirect()->route('penyuluh.user.index')->with('success', 'Data User ' . $request->name .' berhasil ditambah');
     }
 
     /**
@@ -147,6 +168,30 @@ class UserController extends Controller
                 })
                 ->rawColumns(['action'])
                 ->make(true);
+        } else {
+            return response()->json(['text'=>'only ajax request']);
+        }
+    }
+
+    public function getDataUserDesa(Request $request)
+    {
+        if($request->ajax()) {
+            $data = Village::all();
+            return response()->json([
+                'data' => $data
+            ]);
+        } else {
+            return response()->json(['text'=>'only ajax request']);
+        }
+    }
+
+    public function getDataUserRole(Request $request)
+    {
+        if($request->ajax()) {
+            $data = Role::whereIn('id', [2,3,4])->get();
+            return response()->json([
+                'data' => $data
+            ]);
         } else {
             return response()->json(['text'=>'only ajax request']);
         }

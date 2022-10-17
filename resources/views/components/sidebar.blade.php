@@ -53,6 +53,12 @@
                 <li class="nav-header">Main Menu</li>
                 @if (auth()->user()->role->name == 'Penyuluh')
                 <li class="nav-item">
+                    <a href="{{ route('penyuluh.user.index') }}" class="nav-link {{ $active == 'user' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>{{__('Pengguna')}}</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('penyuluh.catin.index') }}" class="nav-link {{ $active == 'catin' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>{{__('Catin')}}</p>

@@ -31,6 +31,7 @@ return new class extends Migration
             $table->foreign('village_id')->references('id')->on('villages');
 
             $table->rememberToken();
+            $table->timestamps();
         });
     }
 

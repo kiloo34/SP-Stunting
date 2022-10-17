@@ -24,6 +24,7 @@ class UserSeeder extends Seeder
                 'role_id' => 1,
                 'name' => 'Penyuluh',
                 'no_hp' => '081233334444',
+                'village_id' => 2,
                 // 'address' => ''
             ],
             [
@@ -33,6 +34,7 @@ class UserSeeder extends Seeder
                 'role_id' => 2,
                 'name' => 'PKK',
                 'no_hp' => '081233334444',
+                'village_id' => 5,
                 // 'address' => ''
             ],
             [
@@ -42,6 +44,7 @@ class UserSeeder extends Seeder
                 'role_id' => 3,
                 'name' => 'Kader',
                 'no_hp' => '081233334444',
+                'village_id' => 1,
                 // 'address' => ''
             ],
             [
@@ -51,6 +54,7 @@ class UserSeeder extends Seeder
                 'role_id' => 4,
                 'name' => 'Bidan',
                 'no_hp' => '081233334444',
+                'village_id' => 3,
                 // 'address' => ''
             ]
         ]);

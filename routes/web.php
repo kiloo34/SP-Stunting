@@ -61,6 +61,8 @@ Route::middleware(['auth'])->group(function () {
         ]);
         // Data Route
         Route::get('ajax/user', [PenyuluhUser::class, 'getDataUser'])->name('penyuluh.getDataUser');
+        Route::get('ajax/user/desa', [PenyuluhUser::class, 'getDataUserDesa'])->name('penyuluh.getDataUserDesa');
+        Route::get('ajax/user/status', [PenyuluhUser::class, 'getDataUserRole'])->name('penyuluh.getDataUserRole');
     });
     
     Route::group([

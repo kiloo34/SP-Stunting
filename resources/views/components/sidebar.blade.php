@@ -59,7 +59,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('penyuluh.tim.index') }}" class="nav-link {{ $active == 'tim' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{__('Tim')}}</p>
                             </a>

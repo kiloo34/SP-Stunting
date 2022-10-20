@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Penyuluh\DashboardController as PenyuluhDashboard;
 use App\Http\Controllers\Penyuluh\CatinController as PenyuluhCatin;
 use App\Http\Controllers\Penyuluh\UserController as PenyuluhUser;
+use App\Http\Controllers\Penyuluh\TimController as PenyuluhTim;
 
 // Bidan
 use App\Http\Controllers\Bidan\DashboardController as BidanDashboard;
@@ -63,6 +64,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('ajax/user', [PenyuluhUser::class, 'getDataUser'])->name('penyuluh.getDataUser');
         Route::get('ajax/user/desa', [PenyuluhUser::class, 'getDataUserDesa'])->name('penyuluh.getDataUserDesa');
         Route::get('ajax/user/status', [PenyuluhUser::class, 'getDataUserRole'])->name('penyuluh.getDataUserRole');
+
+        // User Route
+        // Basic Route
+        Route::resource('tim', PenyuluhTim::class, [
+            'as' => 'penyuluh'
+        ]);
+        // Data Route
+        Route::get('ajax/tim', [PenyuluhTim::class, 'getDataTim'])->name('penyuluh.getDataTim');
     });
     
     Route::group([

@@ -7,7 +7,7 @@ use App\Models\Team;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class TimController extends Controller
+class TeamController extends Controller
 {
     /**
      * Display a listing of the resource.

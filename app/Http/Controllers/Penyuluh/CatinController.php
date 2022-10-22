@@ -8,8 +8,10 @@ use Illuminate\Http\Request;
 use App\Models\Catin;
 use App\Models\CatinStatus;
 use App\Models\Village;
+use App\Models\Team;
 
 use App\Http\Requests\Penyuluh\CatinRequest;
+use App\Http\Requests\Penyuluh\CatinTeamRequest;
 
 use Yajra\DataTables\DataTables;
 
@@ -118,10 +120,42 @@ class CatinController extends Controller
         //
     }
 
+    /**
+     * Show the form for add team the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function addTeam(Catin $catin)
+    {
+        return view('penyuluh.catin.team', [
+            'title' => 'catin',
+            'subtitle' => 'edit',
+            'catin' => $catin,
+            'active' => 'catin',
+        ]);
+    }
+    
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateTeam(CatinTeamRequest $request, Catin $catin)
+    {
+        Catin::where('id', $catin->id)
+            ->update([
+                'team_id' => $request->team
+            ]);
+        return redirect()->route('penyuluh.catin.index')->with('success', 'Data Tim Pendamping Pengantin berhasil di update');
+    }
+
     public function getDataCatin(Request $request)
     {
         if($request->ajax()) {
-            $data = Catin::with('desa', 'status')->get();
+            $data = Catin::with('desa', 'status', 'team')->get();
             
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -155,19 +189,38 @@ class CatinController extends Controller
                     $status = $row->status->name;
                     return $status;
                 })
+                ->addColumn('tim', function($row){
+                    $team = '-';
+                    if ($row->team != null) {
+                        $team = $row->team->name != null ? $row->team->name : '-';
+                    }
+                    return $team;
+                })
                 ->addColumn('action', function($row){
-                    $actionBtn = '
-                        <div class="btn-group btn-group-sm">
-                            <a href="#" class="btn btn-info">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            <a href="'.route("penyuluh.catin.edit", $row->id).'" class="btn btn-primary">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="#" class="btn btn-danger">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </div>';
+                    $a = '<a href="'.route("penyuluh.addTeam", $row->id).'" class="btn btn-sm btn-primary">
+                        <i class="fas fa-plus"></i>
+                        Tambah tim Pendamping
+                    </a>';
+                    $b = '
+                        <a href="#" class="btn btn-sm btn-info">
+                            <i class="fas fa-eye"></i>
+                            Detail
+                        </a>
+                        <a href="'.route("penyuluh.catin.edit", $row->id).'" class="btn btn-sm btn-primary">
+                            <i class="fas fa-edit"></i>
+                            Edit
+                        </a>
+                        <a href="#" class="btn btn-sm btn-danger">
+                            <i class="fas fa-trash"></i>
+                            Hapus
+                        </a>
+                    ';
+                    $c = '<a href="'.route("penyuluh.addTeam", $row->id).'" class="btn btn-sm btn-primary">
+                            <i class="fas fa-edit"></i>
+                            Ubah tim Pendamping
+                        </a>';
+
+                    $actionBtn = $row->team == null ? $a.$b : $c.$b;
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -193,6 +246,18 @@ class CatinController extends Controller
     {
         if($request->ajax()) {
             $data = CatinStatus::all();
+            return response()->json([
+                'data' => $data
+            ]);
+        } else {
+            return response()->json(['text'=>'only ajax request']);
+        }
+    }
+
+    public function getDataCatinTeam(Request $request) 
+    {
+        if($request->ajax()) {
+            $data = Team::all();
             return response()->json([
                 'data' => $data
             ]);

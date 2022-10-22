@@ -55,7 +55,7 @@
                 <li class="nav-item {{ $active == 'user' || $active == 'tim' ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ $active == 'user' || $active == 'tim' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-users"></i>
-                        <p> {{__('Pengguna')}} <i class="fas fa-angle-right right"></i></p>
+                        <p> {{__('Tim Pendamping')}} <i class="fas fa-angle-right right"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
@@ -67,7 +67,7 @@
                         <li class="nav-item">
                             <a href="{{ route('penyuluh.user.index') }}" class="nav-link {{ $active == 'user' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>{{__('Pengguna')}}</p>
+                                <p>{{__('Anggota Tim')}}</p>
                             </a>
                         </li>
                     </ul>

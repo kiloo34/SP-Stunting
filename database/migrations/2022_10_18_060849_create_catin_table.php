@@ -23,9 +23,11 @@ return new class extends Migration
 
             $table->unsignedBigInteger('village_id')->nullable();
             $table->unsignedBigInteger('status_id')->nullable();
+            $table->unsignedBigInteger('team_id')->nullable();
 
             $table->foreign('village_id')->references('id')->on('villages');
             $table->foreign('status_id')->references('id')->on('catin_statuses');
+            $table->foreign('team_id')->references('id')->on('teams');
 
             $table->timestamps();
         });

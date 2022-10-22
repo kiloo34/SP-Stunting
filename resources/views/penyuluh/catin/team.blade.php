@@ -93,9 +93,14 @@
 
     function getDataTeam() {
         var team_id = "{{ $catin->team_id }}"
-        var url = '{{ route("penyuluh.getDataCatinTeam", ':team') }}';
-        // var url = "{{ route('penyuluh.removeFromTeam', [":team", ":user"]) }}";
-        url = url.replace(':team', team_id);
+        
+        if (team_id == '') {
+            var url = '{{ route("penyuluh.getDataCatinTeam") }}';
+        } else {
+            var url = '{{ route("penyuluh.getDataCatinTeamId", ':team') }}';
+            url = url.replace(':team', team_id);
+        }
+        console.log(url);
 
         $.get(url, function(data) {
             var select = $('#catinTeam');

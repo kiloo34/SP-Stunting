@@ -13,7 +13,7 @@
                     {{__('List Data')}} {{ucfirst($title)}}
                 </h3>
                 <div class="card-tools">
-                    <a href="{{ route('penyuluh.tim.create') }}" class="btn btn-success btn-sm">
+                    <a href="{{ route('penyuluh.team.create') }}" class="btn btn-success btn-sm">
                         <i class="fas fa-plus"></i>
                         {{__('Tambah Data')}} {{ucfirst($title)}}
                     </a>

@@ -63,7 +63,9 @@
                         <label for="catinTeam" class="col-sm-2 col-form-label">{{__('Tim')}}</label>
                         <div class="col-sm-10">
                             <select name="team" class="form-control @error('team') is-invalid @enderror" id="catinTeam">
+                                @if ($catin->team_id != null)
                                 <option value="{{$catin->team_id}}" selected>{{$catin->team->name}}</option>
+                                @endif
                             </select>
                             @error('team')
                             <span class="error invalid-feedback">
@@ -90,7 +92,11 @@
     })
 
     function getDataTeam() {
-        var url = '{{ route("penyuluh.getDataCatinTeam") }}';
+        var team_id = "{{ $catin->team_id }}"
+        var url = '{{ route("penyuluh.getDataCatinTeam", ':team') }}';
+        // var url = "{{ route('penyuluh.removeFromTeam', [":team", ":user"]) }}";
+        url = url.replace(':team', team_id);
+
         $.get(url, function(data) {
             var select = $('#catinTeam');
             select.append('<option value="">Pilih Tim Pendamping</option>')

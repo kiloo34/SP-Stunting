@@ -28,6 +28,15 @@ class TeamSeeder extends Seeder
             ],
             [
                 'name' => 'tim 4',
+            ],
+            [
+                'name' => 'tim 5',
+            ],
+            [
+                'name' => 'tim 6',
+            ],
+            [
+                'name' => 'tim 7',
             ]
         ]);
     }

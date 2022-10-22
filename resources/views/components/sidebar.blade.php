@@ -52,14 +52,14 @@
                 </li>
                 <li class="nav-header">Main Menu</li>
                 @if (auth()->user()->role->name == 'Penyuluh')
-                <li class="nav-item {{ $active == 'user' || $active == 'tim' ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ $active == 'user' || $active == 'tim' ? 'active' : '' }}">
+                <li class="nav-item {{ $active == 'user' || $active == 'team' ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ $active == 'user' || $active == 'team' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-users"></i>
                         <p> {{__('Tim Pendamping')}} <i class="fas fa-angle-right right"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('penyuluh.tim.index') }}" class="nav-link {{ $active == 'tim' ? 'active' : '' }}">
+                            <a href="{{ route('penyuluh.team.index') }}" class="nav-link {{ $active == 'team' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{__('Tim')}}</p>
                             </a>

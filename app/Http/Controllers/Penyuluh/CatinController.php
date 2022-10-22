@@ -12,7 +12,7 @@ use App\Models\Team;
 
 use App\Http\Requests\Penyuluh\CatinRequest;
 use App\Http\Requests\Penyuluh\CatinTeamRequest;
-
+use Illuminate\Support\Arr;
 use Yajra\DataTables\DataTables;
 
 class CatinController extends Controller
@@ -254,10 +254,11 @@ class CatinController extends Controller
         }
     }
 
-    public function getDataCatinTeam(Request $request) 
+    public function getDataCatinTeam(Request $request, Team $team) 
     {
         if($request->ajax()) {
-            $data = Team::all();
+            // dd($team);
+            $data = Team::whereNotIn('id', array($team->id))->get();
             return response()->json([
                 'data' => $data
             ]);

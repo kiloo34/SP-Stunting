@@ -31,6 +31,7 @@
                                     <th>{{__('Alamat')}}</th>
                                     <th>{{__('No Handphone')}}</th>
                                     <th>{{__('Status')}}</th>
+                                    <th>{{__('Tim Pendamping')}}</th>
                                     <th>{{__('Aksi')}}</th>
                                 </thead>
                             </table>
@@ -60,6 +61,7 @@
                     {data: 'address', name: 'address'},
                     {data: 'no_hp', name: 'no_hp'},
                     {data: 'status', name: 'status'},
+                    {data: 'tim', name: 'tim'},
                     {data: 'action', name: 'action'},
                 ]
             });

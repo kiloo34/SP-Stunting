@@ -41,4 +41,14 @@ class Catin extends Model
     {
         return $this->belongsTo(CatinStatus::class, 'status_id');
     }
+
+    /**
+     * Get the team that owns the Catin
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function team()
+    {
+        return $this->belongsTo(Team::class, 'team_id');
+    }
 }

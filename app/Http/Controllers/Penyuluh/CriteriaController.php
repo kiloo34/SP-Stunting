@@ -93,12 +93,26 @@ class CriteriaController extends Controller
     {
         if ($request->ajax()) {
             $data = Criteria::all();
+
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('name', function($row){
                     $name = '';
                     $name = $row->name != null ? $row->name : '-';
                     return $name;
+                })
+                ->addColumn('value', function($row){
+                    $value = '';
+                    $value = $row->value != null ? $row->value : '-';
+                    return $value;
+                })
+                ->addColumn('conversion', function($row){
+                    $conversion = '';
+                    
+                    $total = Criteria::sum('value');
+
+                    $conversion = $row->value != null ? ($row->value/$total) : '-';
+                    return $conversion;
                 })
                 ->addColumn('action', function($row){
                     $actionBtn = '

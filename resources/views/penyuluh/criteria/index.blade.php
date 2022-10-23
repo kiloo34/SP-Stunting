@@ -26,6 +26,8 @@
                             <thead>
                                 <th>{{__('#')}}</th>
                                 <th>{{__('Nama')}}</th>
+                                <th>{{__('Nilai')}}</th>
+                                <th>{{__('Konversi')}}</th>
                                 <th>{{__('Aksi')}}</th>
                             </thead>
                         </table>
@@ -51,6 +53,8 @@
                 "columns": [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'name', name: 'name'},
+                    {data: 'value', name: 'value'},
+                    {data: 'conversion', name: 'conversion'},
                     {data: 'action', name: 'action'},
                 ]
             });

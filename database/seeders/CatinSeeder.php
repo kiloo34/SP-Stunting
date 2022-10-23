@@ -23,8 +23,9 @@ class CatinSeeder extends Seeder
                 'no_hp' => '081233334444',
                 'age' => '32',
                 'address' => 'ini alamat dump',
+                'status_id' => 1,
                 'village_id' => 1 ,
-                'status_id' => 1
+                'team_id' => 1,
             ],
             [
                 'name' => 'Wardatul Hoiriyah',
@@ -32,8 +33,9 @@ class CatinSeeder extends Seeder
                 'no_hp' => '081233334444',
                 'age' => '20',
                 'address' => 'ini alamat dump',
+                'status_id' => 1,
                 'village_id' => 2,
-                'status_id' => 1
+                'team_id' => 2,
             ],
             [
                 'name' => 'Dewi Nur Aini',
@@ -41,8 +43,9 @@ class CatinSeeder extends Seeder
                 'no_hp' => '081233334444',
                 'age' => '23',
                 'address' => 'ini alamat dump',
+                'status_id' => 1,
                 'village_id' => 3 ,
-                'status_id' => 1
+                'team_id' => 3,
             ],
             [
                 'name' => 'Ila Wardiyah',
@@ -50,8 +53,9 @@ class CatinSeeder extends Seeder
                 'no_hp' => '081233334444',
                 'age' => '24',
                 'address' => 'ini alamat dump',
+                'status_id' => 1,
                 'village_id' => 4 ,
-                'status_id' => 1
+                'team_id' => 4,
             ],
             [
                 'name' => 'RIKA',
@@ -59,8 +63,9 @@ class CatinSeeder extends Seeder
                 'no_hp' => '081233334444',
                 'age' => '19',
                 'address' => 'ini alamat dump',
+                'status_id' => 1,
                 'village_id' => 4 ,
-                'status_id' => 1
+                'team_id' => 5,
             ],
             [
                 'name' => 'Misnaya',
@@ -68,8 +73,9 @@ class CatinSeeder extends Seeder
                 'no_hp' => '081233334444',
                 'age' => '19',
                 'address' => 'ini alamat dump',
+                'status_id' => 1,
                 'village_id' => 4 ,
-                'status_id' => 1
+                'team_id' => 6,
             ],
             [
                 'name' => 'Halima',
@@ -77,8 +83,9 @@ class CatinSeeder extends Seeder
                 'no_hp' => '081233334444',
                 'age' => '22',
                 'address' => 'ini alamat dump',
+                'status_id' => 1,
                 'village_id' => 4 ,
-                'status_id' => 1
+                'team_id' => 7,
             ],
             [
                 'name' => 'Siti Marifah',
@@ -86,8 +93,9 @@ class CatinSeeder extends Seeder
                 'no_hp' => '081233334444',
                 'age' => '20',
                 'address' => 'ini alamat dump',
+                'status_id' => 1,
                 'village_id' => 4 ,
-                'status_id' => 1
+                'team_id' => 1,
             ],
             [
                 'name' => 'Koyim',
@@ -95,8 +103,9 @@ class CatinSeeder extends Seeder
                 'no_hp' => '081233334444',
                 'age' => '17',
                 'address' => 'ini alamat dump',
+                'status_id' => 1,
                 'village_id' => 4 ,
-                'status_id' => 1
+                'team_id' => 2,
             ],
             [
                 'name' => 'Wiwin Husniah',
@@ -104,8 +113,9 @@ class CatinSeeder extends Seeder
                 'no_hp' => '081233334444',
                 'age' => '21',
                 'address' => 'ini alamat dump',
+                'status_id' => 1,
                 'village_id' => 4 ,
-                'status_id' => 1
+                'team_id' => 3,
             ],
             [
                 'name' => 'Siti Marifah',
@@ -113,8 +123,9 @@ class CatinSeeder extends Seeder
                 'no_hp' => '081233334444',
                 'age' => '20',
                 'address' => 'ini alamat dump',
+                'status_id' => 1,
                 'village_id' => 4 ,
-                'status_id' => 1
+                'team_id' => 4,
             ],
             [
                 'name' => 'Sofianatul Hasanah',
@@ -122,8 +133,9 @@ class CatinSeeder extends Seeder
                 'no_hp' => '081233334444',
                 'age' => '19',
                 'address' => 'ini alamat dump',
+                'status_id' => 1,
                 'village_id' => 4 ,
-                'status_id' => 1
+                'team_id' => 5,
             ],
             [
                 'name' => 'Laily Agustin',
@@ -132,7 +144,8 @@ class CatinSeeder extends Seeder
                 'age' => '22',
                 'address' => 'ini alamat dump',
                 'village_id' => 4 ,
-                'status_id' => 1
+                'status_id' => 1,
+                'team_id' => 6,
             ],
             [
                 'name' => 'Ifatun Nisak',
@@ -141,7 +154,8 @@ class CatinSeeder extends Seeder
                 'age' => '24',
                 'address' => 'ini alamat dump',
                 'village_id' => 4 ,
-                'status_id' => 1
+                'status_id' => 1,
+                'team_id' => 7,
             ],
             [
                 'name' => 'Refika Amfelia Febiola',
@@ -150,7 +164,8 @@ class CatinSeeder extends Seeder
                 'age' => '22',
                 'address' => 'ini alamat dump',
                 'village_id' => 4 ,
-                'status_id' => 1
+                'status_id' => 1,
+                'team_id' => 1,
             ],
             [
                 'name' => 'Siti Maimunah',
@@ -159,7 +174,8 @@ class CatinSeeder extends Seeder
                 'age' => '28',
                 'address' => 'ini alamat dump',
                 'village_id' => 4 ,
-                'status_id' => 1
+                'status_id' => 1,
+                'team_id' => 2,
             ],
             [
                 'name' => 'Yulia Tri Susanti',
@@ -168,7 +184,8 @@ class CatinSeeder extends Seeder
                 'age' => '26',
                 'address' => 'ini alamat dump',
                 'village_id' => 4 ,
-                'status_id' => 1
+                'status_id' => 1,
+                'team_id' => 3,
             ],
         ]);
     }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\PKK;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Catin;
+use App\Models\UserTeam;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 class CatinController extends Controller
@@ -26,7 +28,11 @@ class CatinController extends Controller
     public function getDataCatin(Request $request)
     {
         if($request->ajax()) {
-            $data = Catin::with('desa', 'status')->get();
+            $user = Auth::user();
+            $in = UserTeam::where('user_id', $user->id)->pluck('team_id');
+            $data = Catin::with('desa', 'status')
+                        ->whereIn('team_id', $in->toArray())
+                        ->get();
             
             return DataTables::of($data)
                 ->addIndexColumn()

@@ -80,6 +80,7 @@
 
         var list_anggota_pendamping_url = "{{ route('penyuluh.getDetailTimPendamping', ":id") }}";
         var list_anggota_url = "{{ route('penyuluh.getDetailAnggotaPendamping') }}";
+        // var list_anggota_url = "{{ route('penyuluh.getDataUser') }}";
 
         list_anggota_pendamping_url = list_anggota_pendamping_url.replace(':id', team_id);
         
@@ -137,12 +138,12 @@
             url: url,
             data: data,
             success: function(data) {
-                // Swal.fire({
-                //     title: data.message,
-                //     icon: 'success',
-                // })
+                var icon = 'success'
+                if (data.code == 500) {
+                    icon = 'warning'
+                }
                 Swal.fire({
-                    icon: 'success',
+                    icon: icon,
                     title: data.message
                 })
 
@@ -163,11 +164,6 @@
         console.log(user_id);
         console.log(url);
 
-        // $.ajaxSetup({
-        //     headers: {
-        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //     }
-        // });
         const data = {
             // _method: 'DELETE',
             _token: '{{ csrf_token() }}',

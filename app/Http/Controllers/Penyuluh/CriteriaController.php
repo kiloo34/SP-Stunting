@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Penyuluh;
 
 use App\Http\Controllers\Controller;
+use App\Models\Criteria;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class CriteriaController extends Controller
 {
@@ -14,10 +16,10 @@ class CriteriaController extends Controller
      */
     public function index()
     {
-        return view('penyuluh.tim.index', [
-            'title' => 'team',
+        return view('penyuluh.criteria.index', [
+            'title' => 'criteria',
             'subtitle' => '',
-            'active' => 'team',
+            'active' => 'criteria',
         ]);
     }
 
@@ -85,5 +87,38 @@ class CriteriaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getCriteria(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Criteria::all();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('name', function($row){
+                    $name = '';
+                    $name = $row->name != null ? $row->name : '-';
+                    return $name;
+                })
+                ->addColumn('action', function($row){
+                    $actionBtn = '
+                        <div class="btn-group btn-group-sm">
+                            <a href="#" class="btn btn-info">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="#" class="btn btn-primary">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        } else {
+            return response()->json(['text'=>'only ajax request']);
+        }
     }
 }

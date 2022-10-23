@@ -254,10 +254,22 @@ class CatinController extends Controller
         }
     }
 
-    public function getDataCatinTeam(Request $request, Team $team) 
+    public function getDataCatinTeam(Request $request) 
     {
         if($request->ajax()) {
             // dd($team);
+            $data = Team::all();
+            return response()->json([
+                'data' => $data
+            ]);
+        } else {
+            return response()->json(['text'=>'only ajax request']);
+        }
+    }
+
+    public function getDataCatinTeamId(Request $request, Team $team) 
+    {
+        if($request->ajax()) {
             $data = Team::whereNotIn('id', array($team->id))->get();
             return response()->json([
                 'data' => $data

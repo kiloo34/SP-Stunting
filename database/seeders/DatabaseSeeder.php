@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             CatinStatusSeeder::class,
             CatinSeeder::class,
             TeamSeeder::class,
+            CriteriaSeeder::class,
         ]);
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Penyuluh\DashboardController as PenyuluhDashboard;
 use App\Http\Controllers\Penyuluh\CatinController as PenyuluhCatin;
 use App\Http\Controllers\Penyuluh\UserController as PenyuluhUser;
 use App\Http\Controllers\Penyuluh\TeamController as PenyuluhTeam;
+use App\Http\Controllers\Penyuluh\CriteriaController as PenyuluhCriteria;
 
 // Bidan
 use App\Http\Controllers\Bidan\DashboardController as BidanDashboard;
@@ -56,7 +57,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('ajax/catin', [PenyuluhCatin::class, 'getDataCatin'])->name('penyuluh.getDataCatin');
         Route::get('ajax/catin/desa', [PenyuluhCatin::class, 'getDataCatinDesa'])->name('penyuluh.getDataCatinDesa');
         Route::get('ajax/catin/status', [PenyuluhCatin::class, 'getDataCatinStatus'])->name('penyuluh.getDataCatinStatus');
-        Route::get('ajax/catin/team/{team}', [PenyuluhCatin::class, 'getDataCatinTeam'])->name('penyuluh.getDataCatinTeam');
+        Route::get('ajax/catin/team', [PenyuluhCatin::class, 'getDataCatinTeam'])->name('penyuluh.getDataCatinTeam');
+        Route::get('ajax/catin/team/{team}', [PenyuluhCatin::class, 'getDataCatinTeamId'])->name('penyuluh.getDataCatinTeamId');
 
         // User Route
         // Basic Route
@@ -78,7 +80,15 @@ Route::middleware(['auth'])->group(function () {
         Route::get('ajax/team/{team}', [PenyuluhTeam::class, 'getDetailTimPendamping'])->name('penyuluh.getDetailTimPendamping');
         Route::post('ajax/team/{team}/{user}', [PenyuluhTeam::class, 'updateToTeam'])->name('penyuluh.updateToTeam');
         Route::delete('ajax/team/{team}/{user}/delete', [PenyuluhTeam::class, 'removeFromTeam'])->name('penyuluh.removeFromTeam');
-        Route::get('ajax/team/user/list', [PenyuluhTeam::class, 'getDetailAnggotaPendamping'])->name('penyuluh.getDetailAnggotaPendamping');
+        Route::get('ajax/user/team/list', [PenyuluhTeam::class, 'getDetailAnggotaPendamping'])->name('penyuluh.getDetailAnggotaPendamping');
+
+        // Criteria Route
+        // Basic Route
+        Route::resource('criteria', PenyuluhCriteria::class, [
+            'as' => 'penyuluh'
+        ]);
+        // Data Route
+        Route::get('ajax/criteria', [PenyuluhCriteria::class, 'getCriteria'])->name('penyuluh.getCriteria');
     });
     
     Route::group([

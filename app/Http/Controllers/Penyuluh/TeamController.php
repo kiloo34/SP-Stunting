@@ -213,17 +213,31 @@ class TeamController extends Controller
         $message = '';
         $code = '';
         if ($request->ajax()) {
-            $userTeam = new UserTeam;
-
-            $userTeam->user_id = $user->id;
-            $userTeam->team_id = $team->id;
             
-            $userTeam->save();
-            $message = 'Pendamping '.$user->name.' Berhasil Ditambahkan ke Tim';
+            $check = UserTeam::where('team_id', $team->id)
+                    ->get();
+
+            if (isset($check)) {
+                $count = 0;
+                foreach ($check as $c) {
+                    if ($user->role_id == $c->user->role_id) {
+                        $count += 1;  
+                    } 
+                }
+                if ($count != 0) {
+                    $code = 500;
+                    $message = 'Peran Pendamping '.$user->name.' Sudah ada di '.$team->name;
+                } else {
+                    $this->storeToTeam($team, $user);
+                    $message = 'Pendamping '.$user->name.' Berhasil Ditambahkan ke Tim';
+                }
+                // dd($message);
+            } else {
+                $this->storeToTeam($team, $user);
+                $message = 'Pendamping '.$user->name.' Berhasil Ditambahkan ke Tim';
+            }
 
             return response()->json([
-                // 'obat' => $medicine,
-                // 'transaksi' => $transaction,
                 'message'   => $message,
                 'code'      => $code
             ]);
@@ -233,6 +247,16 @@ class TeamController extends Controller
                 'message' => $message,
             ]);
         }
+    }
+
+    private function storeToTeam($team, $user)
+    {
+        $userTeam = new UserTeam;
+
+        $userTeam->user_id = $user->id;
+        $userTeam->team_id = $team->id;
+        
+        $userTeam->save();
     }
 
     public function removeFromTeam(Request $request, Team $team, User $user)

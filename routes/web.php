@@ -79,7 +79,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('ajax/team/{team}', [PenyuluhTeam::class, 'getDetailTimPendamping'])->name('penyuluh.getDetailTimPendamping');
         Route::post('ajax/team/{team}/{user}', [PenyuluhTeam::class, 'updateToTeam'])->name('penyuluh.updateToTeam');
         Route::delete('ajax/team/{team}/{user}/delete', [PenyuluhTeam::class, 'removeFromTeam'])->name('penyuluh.removeFromTeam');
-        Route::get('ajax/team/user/list', [PenyuluhTeam::class, 'getDetailAnggotaPendamping'])->name('penyuluh.getDetailAnggotaPendamping');
+        Route::get('ajax/user/team/list', [PenyuluhTeam::class, 'getDetailAnggotaPendamping'])->name('penyuluh.getDetailAnggotaPendamping');
     });
     
     Route::group([

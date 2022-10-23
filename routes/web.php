@@ -8,18 +8,22 @@ use App\Http\Controllers\Penyuluh\CatinController as PenyuluhCatin;
 use App\Http\Controllers\Penyuluh\UserController as PenyuluhUser;
 use App\Http\Controllers\Penyuluh\TeamController as PenyuluhTeam;
 use App\Http\Controllers\Penyuluh\CriteriaController as PenyuluhCriteria;
+use App\Http\Controllers\Penyuluh\ReportController as PenyuluhReport;
 
 // Bidan
 use App\Http\Controllers\Bidan\DashboardController as BidanDashboard;
 use App\Http\Controllers\Bidan\CatinController as BidanCatin;
+use App\Http\Controllers\Bidan\ReportController as BidanReport;
 
 // PKK
 use App\Http\Controllers\PKK\DashboardController as PKKDashboard;
 use App\Http\Controllers\PKK\CatinController as PKKCatin;
+use App\Http\Controllers\PKK\ReportController as PKKReport;
 
 // Kader
 use App\Http\Controllers\Kader\DashboardController as KaderDashboard;
 use App\Http\Controllers\Kader\CatinController as KaderCatin;
+use App\Http\Controllers\Kader\ReportController as KaderReport;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +93,11 @@ Route::middleware(['auth'])->group(function () {
         ]);
         // Data Route
         Route::get('ajax/criteria', [PenyuluhCriteria::class, 'getCriteria'])->name('penyuluh.getCriteria');
+
+        // Report Route
+        // Basic Route
+        Route::get('report', [PenyuluhReport::class, 'index'])->name('penyuluh.report.index');
+        // Data Route
     });
     
     Route::group([
@@ -105,6 +114,12 @@ Route::middleware(['auth'])->group(function () {
         ]);
         // Data Route
         Route::get('ajax/catin', [BidanCatin::class, 'getDataCatin'])->name('bidan.getDataCatin');
+
+        // Report Route
+        // Basic Route
+        Route::resource('report', BidanReport::class, [
+            'as' => 'bidan'
+        ]);
     });
 
     Route::group([
@@ -119,6 +134,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/catin', [PKKCatin::class, 'index'])->name('pkk.catin.index');
         // Data Route
         Route::get('ajax/catin', [PKKCatin::class, 'getDataCatin'])->name('pkk.getDataCatin');
+
+        // Report Route
+        // Basic Route
+        Route::resource('report', PKKReport::class, [
+            'as' => 'pkk'
+        ]);
     });
     
     Route::group([
@@ -133,6 +154,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/catin', [KaderCatin::class, 'index'])->name('kader.catin.index');
         // Data Route
         Route::get('ajax/catin', [KaderCatin::class, 'getDataCatin'])->name('kader.getDataCatin');
+        
+        // Report Route
+        // Basic Route
+        Route::resource('report', KaderReport::class, [
+            'as' => 'kader'
+        ]);
     });
 });
 

@@ -25,7 +25,19 @@
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
-                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
+                        @if (auth()->user()->role->name == 'Penyuluh')
+                        <a href="{{ route('penyuluh.dashboard.index') }}" class="brand-link text-sm text-gray-700 dark:text-gray-500 underline pl-5">
+                        @elseif (auth()->user()->role->name == 'Bidan')
+                        <a href="{{ route('bidan.dashboard.index') }}" class="brand-link text-sm text-gray-700 dark:text-gray-500 underline pl-5">
+                        @elseif (auth()->user()->role->name == 'PKK')
+                        <a href="{{ route('pkk.dashboard.index') }}" class="brand-link text-sm text-gray-700 dark:text-gray-500 underline pl-5">
+                        @elseif (auth()->user()->role->name == 'Kader')
+                        <a href="{{ route('kader.dashboard.index') }}" class="brand-link text-sm text-gray-700 dark:text-gray-500 underline pl-5">
+                        @else
+                        <a href="#" class="brand-link text-sm text-gray-700 dark:text-gray-500 underline pl-5">
+                        @endif
+                            Home
+                        </a>
                         <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
                             <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}

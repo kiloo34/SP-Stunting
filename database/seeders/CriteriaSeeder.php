@@ -18,19 +18,24 @@ class CriteriaSeeder extends Seeder
         \DB::table('criterias')->truncate();
         \DB::table('criterias')->insert([
             [
-                'name' => 'umur'
+                'name' => 'umur',
+                'value' => 5
             ],
             [
-                'name' => 'hb'
+                'name' => 'hb',
+                'value' => 4
             ],
             [
-                'name' => 'imt'
+                'name' => 'imt',
+                'value' => 3
             ],
             [
-                'name' => 'lila'
+                'name' => 'lila',
+                'value' => 2
             ],
             [
-                'name' => 'merokok'
+                'name' => 'merokok',
+                'value' => 1
             ],
         ]);
     }

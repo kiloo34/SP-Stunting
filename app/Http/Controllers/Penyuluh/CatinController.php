@@ -199,12 +199,16 @@ class CatinController extends Controller
                 ->addColumn('action', function($row){
                     $a = '<a href="'.route("penyuluh.addTeam", $row->id).'" class="btn btn-sm btn-primary">
                         <i class="fas fa-plus"></i>
-                        Tambah tim Pendamping
+                        Tambah tim
                     </a>';
                     $b = '
                         <a href="#" class="btn btn-sm btn-info">
                             <i class="fas fa-eye"></i>
                             Detail
+                        </a>
+                        <a href="#" class="btn btn-sm btn-primary">
+                            <i class="fas fa-plus"></i>
+                            Tambah Nilai
                         </a>
                         <a href="'.route("penyuluh.catin.edit", $row->id).'" class="btn btn-sm btn-primary">
                             <i class="fas fa-edit"></i>
@@ -217,7 +221,7 @@ class CatinController extends Controller
                     ';
                     $c = '<a href="'.route("penyuluh.addTeam", $row->id).'" class="btn btn-sm btn-primary">
                             <i class="fas fa-edit"></i>
-                            Ubah tim Pendamping
+                            Ubah tim
                         </a>';
 
                     $actionBtn = $row->team == null ? $a.$b : $c.$b;
@@ -257,7 +261,6 @@ class CatinController extends Controller
     public function getDataCatinTeam(Request $request) 
     {
         if($request->ajax()) {
-            // dd($team);
             $data = Team::all();
             return response()->json([
                 'data' => $data

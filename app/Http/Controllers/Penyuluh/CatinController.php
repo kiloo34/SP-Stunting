@@ -12,7 +12,7 @@ use App\Models\Team;
 
 use App\Http\Requests\Penyuluh\CatinRequest;
 use App\Http\Requests\Penyuluh\CatinTeamRequest;
-use Illuminate\Support\Arr;
+
 use Yajra\DataTables\DataTables;
 
 class CatinController extends Controller

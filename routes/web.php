@@ -56,7 +56,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('ajax/catin', [PenyuluhCatin::class, 'getDataCatin'])->name('penyuluh.getDataCatin');
         Route::get('ajax/catin/desa', [PenyuluhCatin::class, 'getDataCatinDesa'])->name('penyuluh.getDataCatinDesa');
         Route::get('ajax/catin/status', [PenyuluhCatin::class, 'getDataCatinStatus'])->name('penyuluh.getDataCatinStatus');
-        Route::get('ajax/catin/team/{team}', [PenyuluhCatin::class, 'getDataCatinTeam'])->name('penyuluh.getDataCatinTeam');
+        Route::get('ajax/catin/team', [PenyuluhCatin::class, 'getDataCatinTeam'])->name('penyuluh.getDataCatinTeam');
+        Route::get('ajax/catin/team/{team}', [PenyuluhCatin::class, 'getDataCatinTeamId'])->name('penyuluh.getDataCatinTeamId');
 
         // User Route
         // Basic Route
@@ -78,7 +79,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('ajax/team/{team}', [PenyuluhTeam::class, 'getDetailTimPendamping'])->name('penyuluh.getDetailTimPendamping');
         Route::post('ajax/team/{team}/{user}', [PenyuluhTeam::class, 'updateToTeam'])->name('penyuluh.updateToTeam');
         Route::delete('ajax/team/{team}/{user}/delete', [PenyuluhTeam::class, 'removeFromTeam'])->name('penyuluh.removeFromTeam');
-        Route::get('ajax/team/user/list', [PenyuluhTeam::class, 'getDetailAnggotaPendamping'])->name('penyuluh.getDetailAnggotaPendamping');
+        Route::get('ajax/user/team/list', [PenyuluhTeam::class, 'getDetailAnggotaPendamping'])->name('penyuluh.getDetailAnggotaPendamping');
     });
     
     Route::group([

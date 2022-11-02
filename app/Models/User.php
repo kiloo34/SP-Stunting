@@ -55,4 +55,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Village::class, 'village_id');
     }
+
+    /**
+     * Get all of the userteam for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function userteam()
+    {
+        return $this->hasMany(UserTeam::class);
+    }
 }

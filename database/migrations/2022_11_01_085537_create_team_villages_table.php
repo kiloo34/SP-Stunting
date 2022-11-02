@@ -13,17 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_teams', function (Blueprint $table) {
+        Schema::create('team_villages', function (Blueprint $table) {
             $table->id();
+            
             $table->unsignedBigInteger('team_id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('as_user')->nullable();
             $table->unsignedBigInteger('village_id');
 
             $table->foreign('team_id')->references('id')->on('teams');
-            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('village_id')->references('id')->on('villages');
-            
+
             $table->timestamps();
         });
     }
@@ -35,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_teams');
+        Schema::dropIfExists('team_villages');
     }
 };

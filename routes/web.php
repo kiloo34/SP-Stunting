@@ -79,12 +79,13 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('team', PenyuluhTeam::class, [
             'as' => 'penyuluh'
         ]);
+        Route::get('team/{team}/{village}', [PenyuluhTeam::class, 'showTeamVillage'])->name('penyuluh.showTeamVillage');
         // Data Route
         Route::get('ajax/team', [PenyuluhTeam::class, 'getDataTim'])->name('penyuluh.getDataTim');
-        Route::get('ajax/team/{team}', [PenyuluhTeam::class, 'getDetailTimPendamping'])->name('penyuluh.getDetailTimPendamping');
-        Route::post('ajax/team/{team}/{user}', [PenyuluhTeam::class, 'updateToTeam'])->name('penyuluh.updateToTeam');
+        Route::get('ajax/team/{team}/{village}', [PenyuluhTeam::class, 'getDetailTimPendamping'])->name('penyuluh.getDetailTimPendamping');
+        Route::post('ajax/team/{team}/{user}/{village}', [PenyuluhTeam::class, 'updateToTeam'])->name('penyuluh.updateToTeam');
         Route::delete('ajax/team/{team}/{user}/delete', [PenyuluhTeam::class, 'removeFromTeam'])->name('penyuluh.removeFromTeam');
-        Route::get('ajax/user/team/list', [PenyuluhTeam::class, 'getDetailAnggotaPendamping'])->name('penyuluh.getDetailAnggotaPendamping');
+        Route::get('ajax/user/team/{team}/list', [PenyuluhTeam::class, 'getDetailAnggotaPendamping'])->name('penyuluh.getDetailAnggotaPendamping');
 
         // Criteria Route
         // Basic Route

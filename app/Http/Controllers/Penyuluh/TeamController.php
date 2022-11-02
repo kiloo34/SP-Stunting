@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Penyuluh;
 
 use App\Http\Controllers\Controller;
 use App\Models\Team;
+use App\Models\TeamVillage;
 use App\Models\User;
 use App\Models\UserTeam;
+use App\Models\Village;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -55,12 +58,12 @@ class TeamController extends Controller
     public function show(Team $team)
     {
         // dd($team);
-        return view('penyuluh.tim.show', [
-            'title' => 'team',
-            'subtitle' => 'detail',
-            'active' => 'team',
-            'team' => $team,
-        ]);
+        // return view('penyuluh.tim.show', [
+        //     'title' => 'team',
+        //     'subtitle' => 'detail',
+        //     'active' => 'team',
+        //     'team' => $team,
+        // ]);
     }
 
     /**
@@ -97,28 +100,48 @@ class TeamController extends Controller
         //
     }
 
+    public function showTeamVillage(Team $team, Village $village)
+    {
+        return view('penyuluh.tim.show', [
+            'title' => 'team',
+            'subtitle' => 'detail',
+            'active' => 'team',
+            'team' => $team,
+            'village' => $village,
+        ]);
+    }
+
     public function getDataTim(Request $request)
     {
         if($request->ajax()) {
-            $data = Team::all();
-            
+            // $data = Team::all();
+            $data = TeamVillage::all();
+            // dd($data);
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('name', function($row){
                     $name = '';
-                    $name = $row->name;
+                    $name = $row->team->name;
                     return $name;
                 })
+                ->addColumn('village', function($row){
+                    $village = '';
+                    $village = $row->village->name;
+                    return $village;
+                })
                 ->addColumn('count_tim', function($row){
-                    // $nik = $row->nik != null ? $row->nik : '-';
                     $count = '0';
-                    $count = UserTeam::where('team_id', $row->id)->get()->count();
+                    // $count = UserTeam::where('team_id', $row->id)->where('village_id', $row->village->id)->count();
+                    $count = UserTeam::where('team_id', $row->team->id)->where('village_id', $row->village->id)->count();
+                    // $count = UserTeam::where('team_id', $row->team->id)->where('village_id', $row->village->id)->toSql();
+                    // $count = $row->village->id;
+                    // echo $count;
                     return $count;
                 })
                 ->addColumn('action', function($row){
                     $actionBtn = '
                         <div class="btn-group btn-group-sm">
-                            <a href="'.route("penyuluh.team.show", $row->id).'" class="btn btn-info">
+                            <a href="'.route("penyuluh.showTeamVillage", [$row->team_id, $row->village_id]).'" class="btn btn-info">
                                 <i class="fas fa-eye"></i>
                             </a>
                             <a href="'.route("penyuluh.team.edit", $row->id).'" class="btn btn-primary">
@@ -137,11 +160,14 @@ class TeamController extends Controller
         }
     }
 
-    public function getDetailTimPendamping(Request $request, Team $team)
+    public function getDetailTimPendamping(Request $request, Team $team, Village $village)
     {
         if($request->ajax()) {
-            $data = UserTeam::where('team_id', $team->id)
-                            ->get();
+
+            $data = UserTeam::with('user')
+                ->where('team_id', $team->id)
+                ->where('village_id', $village->id)
+                ->get();
 
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -152,7 +178,8 @@ class TeamController extends Controller
                 })
                 ->addColumn('role', function($row){
                     $role = '-';
-                    $role = $row->user->role->name;
+                    // $role = $row->user->role->name;
+                    $role = $row->as_user == '' ? '-' : $row->as_user;
                     return $role;
                 })
                 ->addColumn('action', function($row){
@@ -171,11 +198,11 @@ class TeamController extends Controller
         }
     }
 
-    public function getDetailAnggotaPendamping(Request $request)
+    public function getDetailAnggotaPendamping(Request $request, Team $team)
     {
         if($request->ajax()) {
-            $notin = UserTeam::pluck('user_id');
-            $data = User::with('role')
+            $notin = UserTeam::where('team_id', array($team->id))->pluck('user_id');
+            $data = User::with(['role', 'userteam'])
                         ->whereNotIn('id', $notin->toArray())
                         ->whereIn('role_id', [2,3,4])
                         ->get();
@@ -217,21 +244,29 @@ class TeamController extends Controller
             $check = UserTeam::where('team_id', $team->id)
                     ->get();
 
-            if (isset($check)) {
-                $count = 0;
-                foreach ($check as $c) {
-                    if ($user->role_id == $c->user->role_id) {
-                        $count += 1;  
-                    } 
-                }
-                if ($count != 0) {
-                    $code = 500;
-                    $message = 'Peran Pendamping '.$user->name.' Sudah ada di '.$team->name;
-                } else {
-                    $this->storeToTeam($team, $user);
-                    $message = 'Pendamping '.$user->name.' Berhasil Ditambahkan ke Tim';
-                }
-                // dd($message);
+            // if (isset($check)) {
+            //     $count = 0;
+            //     foreach ($check as $c) {
+            //         if ($user->role_id == $c->user->role_id) {
+            //             $count += 1;  
+            //         } 
+            //     }
+            //     if ($count != 0) {
+            //         $code = 500;
+            //         $message = 'Peran Pendamping '.$user->name.' Sudah ada di '.$team->name;
+            //     } else {
+            //         $this->storeToTeam($team, $user);
+            //         $message = 'Pendamping '.$user->name.' Berhasil Ditambahkan ke Tim';
+            //     }
+            //     // dd($message);
+            // } else {
+            //     $this->storeToTeam($team, $user);
+            //     $message = 'Pendamping '.$user->name.' Berhasil Ditambahkan ke Tim';
+            // }
+
+            if (count($check) >= 3) {
+                $message = 'Tim Sudah Penuh';
+                $code = 500;
             } else {
                 $this->storeToTeam($team, $user);
                 $message = 'Pendamping '.$user->name.' Berhasil Ditambahkan ke Tim';

@@ -235,14 +235,17 @@ class TeamController extends Controller
         }
     }
 
-    public function updateToTeam(Request $request, Team $team, User $user)
+    public function updateToTeam(Request $request, Team $team, User $user, Village $village)
     {
         $message = '';
         $code = '';
         if ($request->ajax()) {
             
             $check = UserTeam::where('team_id', $team->id)
-                    ->get();
+                ->where('village_id', $village->id)
+                ->get();
+
+            // dd($check);
 
             // if (isset($check)) {
             //     $count = 0;
@@ -268,7 +271,7 @@ class TeamController extends Controller
                 $message = 'Tim Sudah Penuh';
                 $code = 500;
             } else {
-                $this->storeToTeam($team, $user);
+                $this->storeToTeam($team, $user, $village);
                 $message = 'Pendamping '.$user->name.' Berhasil Ditambahkan ke Tim';
             }
 
@@ -284,12 +287,13 @@ class TeamController extends Controller
         }
     }
 
-    private function storeToTeam($team, $user)
+    private function storeToTeam($team, $user, $village)
     {
         $userTeam = new UserTeam;
 
         $userTeam->user_id = $user->id;
         $userTeam->team_id = $team->id;
+        $userTeam->village_id = $village->id;
         
         $userTeam->save();
     }

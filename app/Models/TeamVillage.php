@@ -5,22 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserTeam extends Model
+class TeamVillage extends Model
 {
     use HasFactory;
 
-    protected $table = 'user_teams';
+    protected $table = 'team_villages';
     protected $primaryKey = 'id';
 
     protected $fillable = [
         'team_id',
-        'user_id',
-        'as_user',
         'village_id',
     ];
 
     /**
-     * Get the team that owns the UserTeam
+     * Get the team that owns the TeamVillage
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -30,12 +28,12 @@ class UserTeam extends Model
     }
 
     /**
-     * Get the user that owns the UserTeam
+     * Get the village that owns the TeamVillage
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function village()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(Village::class, 'village_id');
     }
 }

@@ -26,6 +26,7 @@
                             <thead>
                                 <th>{{__('#')}}</th>
                                 <th>{{__('Nama')}}</th>
+                                <th>{{__('Desa')}}</th>
                                 <th>{{__('Total Anggota')}}</th>
                                 <th>{{__('Aksi')}}</th>
                             </thead>
@@ -52,6 +53,7 @@
                 "columns": [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'name', name: 'name'},
+                    {data: 'village', name: 'village'},
                     {data: 'count_tim', name: 'count_tim'},
                     {data: 'action', name: 'action'},
                 ]

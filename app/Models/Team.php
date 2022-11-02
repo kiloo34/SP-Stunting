@@ -35,4 +35,14 @@ class Team extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    /**
+     * Get all of the team_village for the Team
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function team_village()
+    {
+        return $this->hasMany(TeamVillage::class);
+    }
 }

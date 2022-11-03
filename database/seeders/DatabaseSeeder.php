@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             CriteriaSeeder::class,
             UserTeamSeeder::class,
             TeamVillageSeeder::class,
+            CatinCriteriaSeeder::class,
         ]);
     }
 }

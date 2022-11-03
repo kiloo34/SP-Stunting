@@ -57,11 +57,11 @@ trait Helpers {
                 break;
             
             case $value >= 25.1 && $value <= 26:
-                $res = 0;
+                $res = 2;
                 break;
             
             case $value >= 18.5 && $value <= 25:
-                $res = 0;
+                $res = 1;
                 break;
             
             default:

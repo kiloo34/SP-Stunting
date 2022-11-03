@@ -93,6 +93,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
+                    <a href="{{ route('penyuluh.catin.index') }}" class="btn btn-danger btn-sm">Kembali</a>
                     <button type="submit" class="btn btn-success btn-sm float-right">{{__('Tambah Data')}}</button>
                 </div>
             </form>

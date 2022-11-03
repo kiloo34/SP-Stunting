@@ -32,6 +32,7 @@
                         <div class="row">
                             <div class="col-12">
                                 @include('components.success')
+                                @include('components.error')
                             </div> 
                         </div>
                         @yield('content')

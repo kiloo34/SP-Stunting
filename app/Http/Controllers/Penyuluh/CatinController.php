@@ -12,11 +12,16 @@ use App\Models\Team;
 
 use App\Http\Requests\Penyuluh\CatinRequest;
 use App\Http\Requests\Penyuluh\CatinTeamRequest;
+use App\Models\CatinCriteria;
+use App\Models\Criteria;
+
+use App\Traits\Helpers;
 
 use Yajra\DataTables\DataTables;
 
 class CatinController extends Controller
 {
+    use Helpers;
     /**
      * Display a listing of the resource.
      *
@@ -74,9 +79,16 @@ class CatinController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Catin $catin)
     {
-        //
+        $data = CatinCriteria::where('catin_id', $catin->id)->get();
+        return view('penyuluh.catin.show', [
+            'title' => 'catin',
+            'subtitle' => 'show',
+            'catin' => $catin,
+            'data' => $data,
+            'active' => 'catin',
+        ]);
     }
 
     /**
@@ -152,6 +164,81 @@ class CatinController extends Controller
         return redirect()->route('penyuluh.catin.index')->with('success', 'Data Tim Pendamping Pengantin berhasil di update');
     }
 
+    public function formValue(Catin $catin)
+    {
+        $criterias = Criteria::all();
+        return view('penyuluh.catin.formvalue', [
+            'title' => 'catin',
+            'subtitle' => 'edit',
+            'catin' => $catin,
+            'criterias' => $criterias,
+            'active' => 'catin',
+        ]);
+    }
+
+    public function storeValue(Request $request, Catin $catin)
+    {
+        $criterias = Criteria::all();
+
+        $name = $request->name;
+        $id = $request->id;
+
+        $msg = '';
+
+        if (count($name) == count($id)) {
+            for ($i=1; $i <= count($id); $i++) { 
+                $conversion = '';
+                if ($name[$i]) {
+                    switch ($criterias[$i-1]) {
+                        case $criterias[$i-1]->name == 'umur':
+                            $conversion = $this->ageCheck($name[$i]);
+                            break;
+                        
+                        case $criterias[$i-1]->name == 'hb':
+                            $conversion = $this->hbCheck($name[$i]);
+                            break;
+                        
+                        case $criterias[$i-1]->name == 'imt':
+                            $conversion = $this->imtCheck($name[$i]);
+                            break;
+                        
+                        case $criterias[$i-1]->name == 'lila':
+                            $conversion = $this->lilaCheck($name[$i]);
+                            break;
+                        
+                        default:
+                            $conversion = $this->smokeCheck($name[$i]);
+                            break;
+                    }
+                    $this->storeDataCatinCriteria($catin->id, $id[$i], $name[$i], $conversion);
+                    $msg = 'Data Kriteria Calon Pengantin ' . $catin->name .' berhasil ditambah';
+                } 
+                else {
+                    $msg = "Form Harus Diisi";
+                    return redirect()->back()->with('error', $msg);            
+                }
+            }
+        } else {
+            $msg = 'Internal server error';
+        }
+        return redirect()->route('penyuluh.catin.index')->with('success', $msg);
+        
+    }
+
+    protected function storeDataCatinCriteria($catin, $criteria, $value, $conversion)
+    {
+        CatinCriteria::updateOrCreate(
+            [
+                'catin_id' => $catin,
+                'criteria_id' => $criteria,
+            ],
+            [
+                'value' => $value,
+                'conversion' => $conversion,
+            ]
+        );
+    }
+
     public function getDataCatin(Request $request)
     {
         if($request->ajax()) {
@@ -202,11 +289,11 @@ class CatinController extends Controller
                         Tambah tim
                     </a>';
                     $b = '
-                        <a href="#" class="btn btn-sm btn-info">
+                        <a href="'.route("penyuluh.catin.show", $row->id).'" class="btn btn-sm btn-info">
                             <i class="fas fa-eye"></i>
                             Detail
                         </a>
-                        <a href="#" class="btn btn-sm btn-primary">
+                        <a href="'.route("penyuluh.formValue", $row->id).'" class="btn btn-sm btn-primary">
                             <i class="fas fa-plus"></i>
                             Tambah Nilai
                         </a>

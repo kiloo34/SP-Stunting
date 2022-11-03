@@ -90,6 +90,12 @@
                         <p>{{__('Laporan')}}</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('penyuluh.report.index') }}" class="nav-link {{ $active == 'report' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>{{__('SPK')}}</p>
+                    </a>
+                </li>
                 @elseif (auth()->user()->role->name == 'Bidan')
                 <li class="nav-item">
                     <a href="{{ route('bidan.catin.index') }}" class="nav-link {{ $active == 'catin' ? 'active' : '' }}">

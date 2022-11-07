@@ -18,8 +18,8 @@ return new class extends Migration
 
             $table->unsignedBigInteger('catin_id');
             $table->unsignedBigInteger('criteria_id');
-            $table->string('value');
-            $table->string('conversion')->comment('1 == tidak terpapar, 2 == terpapar');
+            $table->float('value');
+            $table->integer('conversion')->comment('1 == tidak terpapar, 2 == terpapar');
 
             $table->foreign('catin_id')->references('id')->on('catin');
             $table->foreign('criteria_id')->references('id')->on('criterias');

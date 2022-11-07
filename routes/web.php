@@ -9,6 +9,7 @@ use App\Http\Controllers\Penyuluh\UserController as PenyuluhUser;
 use App\Http\Controllers\Penyuluh\TeamController as PenyuluhTeam;
 use App\Http\Controllers\Penyuluh\CriteriaController as PenyuluhCriteria;
 use App\Http\Controllers\Penyuluh\ReportController as PenyuluhReport;
+use App\Http\Controllers\Penyuluh\SpkController as PenyuluhSpk;
 
 // Bidan
 use App\Http\Controllers\Bidan\DashboardController as BidanDashboard;
@@ -101,6 +102,12 @@ Route::middleware(['auth'])->group(function () {
         // Basic Route
         Route::get('report', [PenyuluhReport::class, 'index'])->name('penyuluh.report.index');
         // Data Route
+
+        // SPK Route
+        // Basic Route
+        Route::get('spk', [PenyuluhSpk::class, 'index'])->name('penyuluh.spk.index');
+        // Data Route
+        Route::get('ajax/spk/calculate', [PenyuluhSpk::class, 'calculate'])->name('penyuluh.spk.calculate');
     });
     
     Route::group([

@@ -23,7 +23,7 @@
                             <select class="form-control @error($kriteria->name) is-invalid @enderror" name="name[{{$kriteria->id}}]">
                                 <option value="">Pilih Jawaban</option>
                                 <option value="1">Tidak Terpapar</option>
-                                <option value="2">Terpapar</option>
+                                <option value="2">Terpapar</option> 
                             </select>
                         </div>
                         @else

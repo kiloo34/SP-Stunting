@@ -45,7 +45,7 @@ class CatinCriteriaSeeder extends Seeder
                 'catin_id' => 1,
                 'criteria_id' => 5,
                 'value' => 1,
-                'conversion' => 5,
+                'conversion' => 1,
             ],
 
             [
@@ -76,7 +76,7 @@ class CatinCriteriaSeeder extends Seeder
                 'catin_id' => 2,
                 'criteria_id' => 5,
                 'value' => 1,
-                'conversion' => 1,
+                'conversion' => 5,
             ],
             
             [
@@ -107,7 +107,7 @@ class CatinCriteriaSeeder extends Seeder
                 'catin_id' => 3,
                 'criteria_id' => 5,
                 'value' => 1,
-                'conversion' => 5,
+                'conversion' => 1,
             ],
             
             [
@@ -138,7 +138,7 @@ class CatinCriteriaSeeder extends Seeder
                 'catin_id' => 4,
                 'criteria_id' => 5,
                 'value' => 1,
-                'conversion' => 5,
+                'conversion' => 1,
             ],
 
             [
@@ -169,7 +169,131 @@ class CatinCriteriaSeeder extends Seeder
                 'catin_id' => 5,
                 'criteria_id' => 5,
                 'value' => 1,
+                'conversion' => 1,
+            ],
+
+            [
+                'catin_id' => 61,
+                'criteria_id' => 1,
+                'value' => 22,
+                'conversion' => 1,
+            ],
+            [
+                'catin_id' => 61,
+                'criteria_id' => 2,
+                'value' => 8,
+                'conversion' => 4,
+            ],
+            [
+                'catin_id' => 61,
+                'criteria_id' => 3,
+                'value' => 15.6,
                 'conversion' => 5,
+            ],
+            [
+                'catin_id' => 61,
+                'criteria_id' => 4,
+                'value' => 17,
+                'conversion' => 5,
+            ],
+            [
+                'catin_id' => 61,
+                'criteria_id' => 5,
+                'value' => 2,
+                'conversion' => 5,
+            ],
+
+            [
+                'catin_id' => 62,
+                'criteria_id' => 1,
+                'value' => 18,
+                'conversion' => 5,
+            ],
+            [
+                'catin_id' => 62,
+                'criteria_id' => 2,
+                'value' => 6.9,
+                'conversion' => 5,
+            ],
+            [
+                'catin_id' => 62,
+                'criteria_id' => 3,
+                'value' => 16.4,
+                'conversion' => 5,
+            ],
+            [
+                'catin_id' => 62,
+                'criteria_id' => 4,
+                'value' => 17,
+                'conversion' => 5,
+            ],
+            [
+                'catin_id' => 62,
+                'criteria_id' => 5,
+                'value' => 1,
+                'conversion' => 1,
+            ],
+
+            [
+                'catin_id' => 63,
+                'criteria_id' => 1,
+                'value' => 16,
+                'conversion' => 5,
+            ],
+            [
+                'catin_id' => 63,
+                'criteria_id' => 2,
+                'value' => 16.9,
+                'conversion' => 4,
+            ],
+            [
+                'catin_id' => 63,
+                'criteria_id' => 3,
+                'value' => 18,
+                'conversion' => 5,
+            ],
+            [
+                'catin_id' => 63,
+                'criteria_id' => 4,
+                'value' => 18,
+                'conversion' => 5,
+            ],
+            [
+                'catin_id' => 63,
+                'criteria_id' => 5,
+                'value' => 2,
+                'conversion' => 5,
+            ],
+
+            [
+                'catin_id' => 64,
+                'criteria_id' => 1,
+                'value' => 21,
+                'conversion' => 1,
+            ],
+            [
+                'catin_id' => 64,
+                'criteria_id' => 2,
+                'value' => 10,
+                'conversion' => 3,
+            ],
+            [
+                'catin_id' => 64,
+                'criteria_id' => 3,
+                'value' => 17.4,
+                'conversion' => 4,
+            ],
+            [
+                'catin_id' => 64,
+                'criteria_id' => 4,
+                'value' => 18.5,
+                'conversion' => 3,
+            ],
+            [
+                'catin_id' => 64,
+                'criteria_id' => 5,
+                'value' => 1,
+                'conversion' => 1,
             ],
         ]);
     }

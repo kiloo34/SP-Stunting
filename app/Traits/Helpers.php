@@ -2,6 +2,10 @@
 
 namespace App\Traits;
 
+use App\Models\Catin;
+use App\Models\CatinCriteria;
+use App\Models\Criteria;
+
 trait Helpers {
     
     protected function ageCheck($value)
@@ -92,7 +96,7 @@ trait Helpers {
     protected function smokeCheck($value) {
         $res = '';
         switch ($value) {
-            case $value == 1:
+            case $value == 2:
                 $res = 5;
                 break;
             
@@ -101,5 +105,42 @@ trait Helpers {
                 break;
         }
         return $res;
+    }
+
+    protected function activeCatin()
+    {
+        return Catin::where('status_id', 1)
+            ->pluck('id');    
+    }
+
+    protected function activeCatinWithRange($total)
+    {
+        return Catin::where('status_id', 1)
+            ->limit($total)
+            ->pluck('id');
+    }
+    
+    protected function countCatinCriteria($array)
+    {
+        return CatinCriteria::distinct()
+            ->whereIn('catin_id', $array)
+            ->count('catin_id');
+    }
+
+    protected function getCatinCriteria($array) {
+        return CatinCriteria::distinct()
+            ->whereIn('catin_id', $array)
+            ->get();
+    }
+
+    protected function getCatinidCriteria($array) {
+        return CatinCriteria::distinct()
+            ->whereIn('catin_id', $array)
+            ->get('catin_id');
+    }
+
+    protected function getCriteria()
+    {
+        return Criteria::all();
     }
 }

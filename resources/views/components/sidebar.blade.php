@@ -91,7 +91,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('penyuluh.report.index') }}" class="nav-link {{ $active == 'report' ? 'active' : '' }}">
+                    <a href="{{ route('penyuluh.spk.index') }}" class="nav-link {{ $active == 'spk' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-book"></i>
                         <p>{{__('SPK')}}</p>
                     </a>

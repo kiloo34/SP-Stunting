@@ -30,6 +30,16 @@ class CatinCriteria extends Model
     }
 
     /**
+     * The desa that belong to the CatinCriteria
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function desa()
+    {
+        return $this->belongsToMany(Village::class, 'catin', 'id', 'village_id');
+    }
+
+    /**
      * Get the criteria that owns the CatinCriteria
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -135,6 +135,7 @@ trait Helpers {
 
     protected function getCatinidCriteria($array) {
         return CatinCriteria::distinct()
+            ->with('catin', 'desa')
             ->whereIn('catin_id', $array)
             ->get('catin_id');
     }
@@ -143,4 +144,7 @@ trait Helpers {
     {
         return Criteria::all();
     }
+
+    // protected 
+
 }

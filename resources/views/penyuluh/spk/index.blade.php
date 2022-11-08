@@ -27,53 +27,7 @@
         </div>
     </div>
 </div>
-{{-- <div class="row" id="res-row">
-    <div class="col-md-4">
-        <!-- Widget: user widget style 2 -->
-        <div class="card card-widget widget-user-2">
-          <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-light">
-                <div class="widget-user-image">
-                    <img class="img-circle elevation-2" src="{{ asset('assets/img/user7-128x128.jpg') }}" alt="User Avatar">
-                </div>
-                <!-- /.widget-user-image -->
-                <h3 class="widget-user-username">Nadia Carmichael</h3>
-                <h5 class="widget-user-desc">Lead Developer</h5>
-            </div>
-        </div>
-        <!-- /.widget-user -->
-    </div>
-    <div class="col-md-4">
-        <!-- Widget: user widget style 2 -->
-        <div class="card card-widget widget-user-2">
-          <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-light">
-                <div class="widget-user-image">
-                    <img class="img-circle elevation-2" src="{{ asset('assets/img/user7-128x128.jpg') }}" alt="User Avatar">
-                </div>
-                <!-- /.widget-user-image -->
-                <h3 class="widget-user-username">Nadia Carmichael</h3>
-                <h5 class="widget-user-desc">Lead Developer</h5>
-            </div>
-        </div>
-        <!-- /.widget-user -->
-    </div>
-    <div class="col-md-4">
-        <!-- Widget: user widget style 2 -->
-        <div class="card card-widget widget-user-2">
-          <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-light">
-                <div class="widget-user-image">
-                    <img class="img-circle elevation-2" src="{{ asset('assets/img/user7-128x128.jpg') }}" alt="User Avatar">
-                </div>
-                <!-- /.widget-user-image -->
-                <h3 class="widget-user-username">Nadia Carmichael</h3>
-                <h5 class="widget-user-desc">Lead Developer</h5>
-            </div>
-        </div>
-        <!-- /.widget-user -->
-    </div>
-</div> --}}
+<div class="row justify-content-center" id="res-row"></div>
 @endsection
 @push('scripts')
 <script>
@@ -89,17 +43,43 @@
         $('#reset-btn').removeClass('d-none')
         $('#calculate-btn').addClass('d-none')
 
-        console.log('masuk')
+        var col = $('#res-row')
+        var html = ''
 
         url = "{{ route('penyuluh.spk.calculate') }}"
-        console.log(url);
+        console.log(url)
         $.ajax({
             type: "get",
             url: url,
-            // data: "data",
-            // dataType: "dataType",
             success: function (response) {
-                console.log(response);
+                jQuery.each(response.data, function(index, itemData) {
+                    console.log(itemData.value);
+                    html += '<div class="col-md-4">'
+                    html += '<div class="card card-widget widget-user-2">'
+                    html += '<div class="widget-user-header bg-light">'
+                    html += '<div class="widget-user-image">'
+                    // html += '<img class="img-circle elevation-2" src="{{ asset("assets/img/user7-128x128.jpg") }}" alt="User Avatar">'
+                    html += '<h1>'+(index+1)+'</h1>'
+                    html += '</div>'
+                    html += '<h3 class="widget-user-username">'+itemData.catin.name+'</h3>'
+                    html += '<h5 class="widget-user-desc">'+itemData.catin.desa+'</h5>'
+                    html += '<h5 class="widget-user-desc"> Nilai : '+itemData.value+'</h5>'
+
+                    if (itemData.value > 0.8) {
+                        html += '<h5 class="widget-user-desc text-danger"> Perlu Intensitas Pendampingan Tinggi </h5>';
+                    } else if (itemData.value >= 0.4 && itemData.value <= 0.8) {
+                        html += '<h5 class="widget-user-desc text-warning"> Perlu Intensitas Pendampingan Sedang </h5>';
+                    } else {
+                        html += '<h5 class="widget-user-desc text-primary"> Perlu Intensitas Pendampingan Rendah </h5>';
+                    }
+
+                    html += '</div>'
+                    html += '</div>'
+                    html += '</div>'
+
+                    col.html(html);
+                });
+
             }
         });
     });
@@ -108,6 +88,11 @@
         $('#res-row').addClass('d-none')
         $('#reset-btn').addClass('d-none')
         $('#calculate-btn').removeClass('d-none')
+        
+        var col = $('#res-row')
+        var html = ''
+
+        col.html('')
     });
 
     // function totalCheck() {

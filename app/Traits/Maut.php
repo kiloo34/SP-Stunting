@@ -39,6 +39,7 @@ trait Maut {
                 $res += ($aCalArray[$i] * $weight[$i]);
             }
         }
+        // dump($res);
         return $res;
     }
 

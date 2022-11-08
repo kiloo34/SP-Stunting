@@ -91,17 +91,17 @@
 
         console.log('masuk')
 
-        url = "{{ route('penyuluh.getDataCatin') }}"
-
-        // $.ajax({
-        //     type: "get",
-        //     url: url,
-        //     // data: "data",
-        //     // dataType: "dataType",
-        //     success: function (response) {
-                
-        //     }
-        // });
+        url = "{{ route('penyuluh.spk.calculate') }}"
+        console.log(url);
+        $.ajax({
+            type: "get",
+            url: url,
+            // data: "data",
+            // dataType: "dataType",
+            success: function (response) {
+                console.log(response);
+            }
+        });
     });
 
     $('#reset-btn').click(function (e) { 

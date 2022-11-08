@@ -78,11 +78,35 @@
                         <p>{{__('Catin')}}</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('penyuluh.criteria.index') }}" class="nav-link {{ $active == 'criteria' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-bars"></i>
+                        <p>{{__('Kriteria')}}</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('penyuluh.report.index') }}" class="nav-link {{ $active == 'report' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>{{__('Laporan')}}</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('penyuluh.spk.index') }}" class="nav-link {{ $active == 'spk' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>{{__('SPK')}}</p>
+                    </a>
+                </li>
                 @elseif (auth()->user()->role->name == 'Bidan')
                 <li class="nav-item">
                     <a href="{{ route('bidan.catin.index') }}" class="nav-link {{ $active == 'catin' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>{{__('Catin')}}</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('bidan.report.index') }}" class="nav-link {{ $active == 'report' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>{{__('Laporan')}}</p>
                     </a>
                 </li>
                 @elseif (auth()->user()->role->name == 'PKK')
@@ -92,11 +116,23 @@
                         <p>{{__('Catin')}}</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('pkk.report.index') }}" class="nav-link {{ $active == 'report' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>{{__('Laporan')}}</p>
+                    </a>
+                </li>
                 @elseif (auth()->user()->role->name == 'Kader')
                 <li class="nav-item">
                     <a href="{{ route('kader.catin.index') }}" class="nav-link {{ $active == 'catin' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>{{__('Catin')}}</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('kader.report.index') }}" class="nav-link {{ $active == 'report' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>{{__('Laporan')}}</p>
                     </a>
                 </li>
                 @endif

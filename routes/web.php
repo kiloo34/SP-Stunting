@@ -7,18 +7,24 @@ use App\Http\Controllers\Penyuluh\DashboardController as PenyuluhDashboard;
 use App\Http\Controllers\Penyuluh\CatinController as PenyuluhCatin;
 use App\Http\Controllers\Penyuluh\UserController as PenyuluhUser;
 use App\Http\Controllers\Penyuluh\TeamController as PenyuluhTeam;
+use App\Http\Controllers\Penyuluh\CriteriaController as PenyuluhCriteria;
+use App\Http\Controllers\Penyuluh\ReportController as PenyuluhReport;
+use App\Http\Controllers\Penyuluh\SpkController as PenyuluhSpk;
 
 // Bidan
 use App\Http\Controllers\Bidan\DashboardController as BidanDashboard;
 use App\Http\Controllers\Bidan\CatinController as BidanCatin;
+use App\Http\Controllers\Bidan\ReportController as BidanReport;
 
 // PKK
 use App\Http\Controllers\PKK\DashboardController as PKKDashboard;
 use App\Http\Controllers\PKK\CatinController as PKKCatin;
+use App\Http\Controllers\PKK\ReportController as PKKReport;
 
 // Kader
 use App\Http\Controllers\Kader\DashboardController as KaderDashboard;
 use App\Http\Controllers\Kader\CatinController as KaderCatin;
+use App\Http\Controllers\Kader\ReportController as KaderReport;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +57,8 @@ Route::middleware(['auth'])->group(function () {
             'as' => 'penyuluh'
         ]);
         Route::get('/catin/{catin}/team', [PenyuluhCatin::class, 'addTeam'])->name('penyuluh.addTeam');
+        Route::get('/catin/{catin}/value', [PenyuluhCatin::class, 'formValue'])->name('penyuluh.formValue');
+        Route::post('/catin/{catin}/value', [PenyuluhCatin::class, 'storeValue'])->name('penyuluh.catin.storeValue');
         Route::put('/catin/{catin}/team', [PenyuluhCatin::class, 'updateTeam'])->name('penyuluh.updateTeam');
         // Data Route
         Route::get('ajax/catin', [PenyuluhCatin::class, 'getDataCatin'])->name('penyuluh.getDataCatin');
@@ -74,12 +82,32 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('team', PenyuluhTeam::class, [
             'as' => 'penyuluh'
         ]);
+        Route::get('team/{team}/{village}', [PenyuluhTeam::class, 'showTeamVillage'])->name('penyuluh.showTeamVillage');
         // Data Route
         Route::get('ajax/team', [PenyuluhTeam::class, 'getDataTim'])->name('penyuluh.getDataTim');
-        Route::get('ajax/team/{team}', [PenyuluhTeam::class, 'getDetailTimPendamping'])->name('penyuluh.getDetailTimPendamping');
-        Route::post('ajax/team/{team}/{user}', [PenyuluhTeam::class, 'updateToTeam'])->name('penyuluh.updateToTeam');
+        Route::get('ajax/team/{team}/{village}', [PenyuluhTeam::class, 'getDetailTimPendamping'])->name('penyuluh.getDetailTimPendamping');
+        Route::post('ajax/team/{team}/{user}/{village}', [PenyuluhTeam::class, 'updateToTeam'])->name('penyuluh.updateToTeam');
         Route::delete('ajax/team/{team}/{user}/delete', [PenyuluhTeam::class, 'removeFromTeam'])->name('penyuluh.removeFromTeam');
-        Route::get('ajax/team/user/list', [PenyuluhTeam::class, 'getDetailAnggotaPendamping'])->name('penyuluh.getDetailAnggotaPendamping');
+        Route::get('ajax/user/team/{team}/list', [PenyuluhTeam::class, 'getDetailAnggotaPendamping'])->name('penyuluh.getDetailAnggotaPendamping');
+
+        // Criteria Route
+        // Basic Route
+        Route::resource('criteria', PenyuluhCriteria::class, [
+            'as' => 'penyuluh'
+        ]);
+        // Data Route
+        Route::get('ajax/criteria', [PenyuluhCriteria::class, 'getCriteria'])->name('penyuluh.getCriteria');
+
+        // Report Route
+        // Basic Route
+        Route::get('report', [PenyuluhReport::class, 'index'])->name('penyuluh.report.index');
+        // Data Route
+
+        // SPK Route
+        // Basic Route
+        Route::get('spk', [PenyuluhSpk::class, 'index'])->name('penyuluh.spk.index');
+        // Data Route
+        Route::get('ajax/spk/calculate', [PenyuluhSpk::class, 'calculate'])->name('penyuluh.spk.calculate');
     });
     
     Route::group([
@@ -96,6 +124,12 @@ Route::middleware(['auth'])->group(function () {
         ]);
         // Data Route
         Route::get('ajax/catin', [BidanCatin::class, 'getDataCatin'])->name('bidan.getDataCatin');
+
+        // Report Route
+        // Basic Route
+        Route::resource('report', BidanReport::class, [
+            'as' => 'bidan'
+        ]);
     });
 
     Route::group([
@@ -110,6 +144,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/catin', [PKKCatin::class, 'index'])->name('pkk.catin.index');
         // Data Route
         Route::get('ajax/catin', [PKKCatin::class, 'getDataCatin'])->name('pkk.getDataCatin');
+
+        // Report Route
+        // Basic Route
+        Route::resource('report', PKKReport::class, [
+            'as' => 'pkk'
+        ]);
     });
     
     Route::group([
@@ -124,6 +164,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/catin', [KaderCatin::class, 'index'])->name('kader.catin.index');
         // Data Route
         Route::get('ajax/catin', [KaderCatin::class, 'getDataCatin'])->name('kader.getDataCatin');
+        
+        // Report Route
+        // Basic Route
+        Route::resource('report', KaderReport::class, [
+            'as' => 'kader'
+        ]);
     });
 });
 

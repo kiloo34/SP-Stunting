@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Bidan;
+namespace App\Http\Controllers\Penyuluh;
 
 use App\Http\Controllers\Controller;
+use App\Models\Criteria;
 use Illuminate\Http\Request;
-use App\Models\Catin;
-use App\Models\UserTeam;
-use Illuminate\Support\Facades\Auth;
-use Yajra\DataTables\DataTables;
+use Yajra\DataTables\Facades\DataTables;
 
-class CatinController extends Controller
+class CriteriaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +16,10 @@ class CatinController extends Controller
      */
     public function index()
     {
-        return view('bidan.catin.index', [
-            'title' => 'catin',
+        return view('penyuluh.criteria.index', [
+            'title' => 'criteria',
             'subtitle' => '',
-            'active' => 'catin',
+            'active' => 'criteria',
         ]);
     }
 
@@ -91,52 +89,42 @@ class CatinController extends Controller
         //
     }
 
-    public function getDataCatin(Request $request)
+    public function getCriteria(Request $request)
     {
-        if($request->ajax()) {
-            $user = Auth::user();
-            $in = UserTeam::where('user_id', $user->id)->pluck('team_id');
-            $data = Catin::with('desa', 'status')
-                        ->whereIn('team_id', $in->toArray())
-                        ->get();
-            
+        if ($request->ajax()) {
+            $data = Criteria::all();
+
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('name', function($row){
                     $name = '';
-                    $name = $row->name;
+                    $name = $row->name != null ? $row->name : '-';
                     return $name;
                 })
-                ->addColumn('nik', function($row){
-                    $nik = '';
-                    $nik = $row->nik;
-                    return $nik;
+                ->addColumn('value', function($row){
+                    $value = '';
+                    $value = $row->value != null ? $row->value : '-';
+                    return $value;
                 })
-                ->addColumn('village', function($row){
-                    $village = '';
-                    $village = $row->desa->name;
-                    return $village;
-                })
-                ->addColumn('address', function($row){
-                    $address = '';
-                    $address = $row->address;
-                    return $address;
-                })
-                ->addColumn('no_hp', function($row){
-                    $no_hp = '';
-                    $no_hp = $row->no_hp;
-                    return $no_hp;
-                })
-                ->addColumn('status', function($row){
-                    $status = '';
-                    $status = $row->status->name;
-                    return $status;
+                ->addColumn('conversion', function($row){
+                    $conversion = '';
+                    
+                    $total = Criteria::sum('value');
+
+                    $conversion = $row->value != null ? ($row->value/$total) : '-';
+                    return $conversion;
                 })
                 ->addColumn('action', function($row){
                     $actionBtn = '
                         <div class="btn-group btn-group-sm">
+                            <a href="#" class="btn btn-info">
+                                <i class="fas fa-eye"></i>
+                            </a>
                             <a href="#" class="btn btn-primary">
                                 <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger">
+                                <i class="fas fa-trash"></i>
                             </a>
                         </div>';
                     return $actionBtn;

@@ -51,4 +51,14 @@ class Catin extends Model
     {
         return $this->belongsTo(Team::class, 'team_id');
     }
+
+    /**
+     * Get all of the catin_category for the Catin
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function catin_category()
+    {
+        return $this->hasMany(CatinCriteria::class);
+    }
 }

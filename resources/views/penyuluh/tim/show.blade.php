@@ -17,8 +17,8 @@
                 <h3>
                     {{ ucfirst($team->name) }}
                 </h3>
-                {{-- <span class="info-box-text">Shadows</span>
-                <span class="info-box-number">Regular</span> --}}
+                <span class="info-box-text">{{__('Desa')}} {{ucfirst($village->name)}}</span>
+                {{-- <span class="info-box-number">Regular</span> --}}
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -76,12 +76,16 @@
 <script>
     $(document).ready(function() {
         var team_id = "{{ $team->id }}";
+        var village_id = "{{ $village->id }}";
         // console.log(value);
 
-        var list_anggota_pendamping_url = "{{ route('penyuluh.getDetailTimPendamping', ":id") }}";
-        var list_anggota_url = "{{ route('penyuluh.getDetailAnggotaPendamping') }}";
+        var list_anggota_pendamping_url = "{{ route('penyuluh.getDetailTimPendamping', [":id",":vill"]) }}";
+        var list_anggota_url = "{{ route('penyuluh.getDetailAnggotaPendamping', ":id") }}";
+        // var list_anggota_url = "{{ route('penyuluh.getDataUser') }}";
 
         list_anggota_pendamping_url = list_anggota_pendamping_url.replace(':id', team_id);
+        list_anggota_pendamping_url = list_anggota_pendamping_url.replace(':vill', village_id);
+        list_anggota_url = list_anggota_url.replace(':id', team_id);
         
         $('#list_tim_pendamping_table').DataTable({
             "language": {
@@ -117,11 +121,13 @@
 
     function addToTeam(user_id) {
         var team_id = "{{ $team->id }}";
+        var village_id = "{{ $village->id }}";
         var user_id = user_id;
 
-        var url = "{{ route('penyuluh.updateToTeam', [":team", ":user"]) }}";
+        var url = "{{ route('penyuluh.updateToTeam', [":team", ":user", ":village"]) }}";
         url = url.replace(':team', team_id);
         url = url.replace(':user', user_id);
+        url = url.replace(':village', village_id);
 
         console.log(team_id);
         console.log(user_id);
@@ -137,12 +143,12 @@
             url: url,
             data: data,
             success: function(data) {
-                // Swal.fire({
-                //     title: data.message,
-                //     icon: 'success',
-                // })
+                var icon = 'success'
+                if (data.code == 500) {
+                    icon = 'warning'
+                }
                 Swal.fire({
-                    icon: 'success',
+                    icon: icon,
                     title: data.message
                 })
 
@@ -153,6 +159,7 @@
     }
     function removeFromTeam(user_id) {
         var team_id = "{{ $team->id }}";
+        var village_id = "{{ $village->id }}";
         var user_id = user_id;
 
         var url = "{{ route('penyuluh.removeFromTeam', [":team", ":user"]) }}";
@@ -163,11 +170,6 @@
         console.log(user_id);
         console.log(url);
 
-        // $.ajaxSetup({
-        //     headers: {
-        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //     }
-        // });
         const data = {
             // _method: 'DELETE',
             _token: '{{ csrf_token() }}',

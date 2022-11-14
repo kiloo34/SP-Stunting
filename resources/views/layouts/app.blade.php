@@ -45,7 +45,9 @@
         {{-- @include('components.sidebar_controller') --}}
 
         <!-- jQuery -->
-        <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+        {{-- <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script> --}}
+        <script src="{{ asset('assets/plugins/jquery/jquery.js') }}"></script>
+        {{-- <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script> --}}
         <!-- Bootstrap 4 -->
         <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <!-- AdminLTE App -->

@@ -62,6 +62,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/catin/{catin}/team', [PenyuluhCatin::class, 'updateTeam'])->name('penyuluh.updateTeam');
         // Data Route
         Route::get('ajax/catin', [PenyuluhCatin::class, 'getDataCatin'])->name('penyuluh.getDataCatin');
+        Route::post('ajax/catin/umur', [PenyuluhCatin::class, 'countAge'])->name('penyuluh.countAge');
         Route::get('ajax/catin/desa', [PenyuluhCatin::class, 'getDataCatinDesa'])->name('penyuluh.getDataCatinDesa');
         Route::get('ajax/catin/status', [PenyuluhCatin::class, 'getDataCatinStatus'])->name('penyuluh.getDataCatinStatus');
         Route::get('ajax/catin/team', [PenyuluhCatin::class, 'getDataCatinTeam'])->name('penyuluh.getDataCatinTeam');

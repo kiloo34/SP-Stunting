@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@include('plugins.daterange')
 @section('title')
     {{__('Catin')}}{{ isset($subtitle) ? ' | ' . ucfirst($subtitle) : '' }}
 @endsection
@@ -17,7 +18,7 @@
                     @foreach ($criterias as $kriteria)
                     <input type="hidden" name="id[{{$kriteria->id}}]" value="{{ $kriteria->id }}">
                     <div class="form-group row">
-                        <label for="catinName" class="col-sm-2 col-form-label">{{strtoupper($kriteria->name)}}</label>
+                        <label for="catinName" class="col-sm-2 col-form-label">{{ucfirst($kriteria->as)}}</label>
                         @if ($kriteria->name == 'merokok')
                         <div class="col-sm-10">
                             <select class="form-control @error($kriteria->name) is-invalid @enderror" name="name[{{$kriteria->id}}]">
@@ -25,6 +26,21 @@
                                 <option value="1">Tidak Terpapar</option>
                                 <option value="2">Terpapar</option> 
                             </select>
+                        </div>
+                        @elseif($kriteria->name == 'umur')
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control @error($kriteria->name) is-invalid @enderror" placeholder="Tanggal Lahir" id="birthdate">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control @error($kriteria->name) is-invalid @enderror" name="name[{{$kriteria->id}}]" readonly placeholder="Umur">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         @else
                         <div class="col-sm-10">
@@ -49,10 +65,12 @@
 </div>
 @endsection
 @push('scripts')
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> --}}
 <script>
     $(document).ready(function() {
         // getDataStatus();
         // getDataVillage();
+        $('#birthdate').datetimepicker();
     })
 </script>
 @endpush

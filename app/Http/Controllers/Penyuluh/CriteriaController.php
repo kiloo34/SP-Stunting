@@ -101,6 +101,11 @@ class CriteriaController extends Controller
                     $name = $row->name != null ? $row->name : '-';
                     return $name;
                 })
+                ->addColumn('as', function($row){
+                    $as = '';
+                    $as = $row->as != null ? $row->as : '-';
+                    return $as;
+                })
                 ->addColumn('value', function($row){
                     $value = '';
                     $value = $row->value != null ? $row->value : '-';

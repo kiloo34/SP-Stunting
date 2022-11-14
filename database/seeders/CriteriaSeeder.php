@@ -19,23 +19,28 @@ class CriteriaSeeder extends Seeder
         \DB::table('criterias')->insert([
             [
                 'name' => 'umur',
-                'value' => 5
+                'value' => 5,
+                'as' => 'umur'
             ],
             [
                 'name' => 'hb',
-                'value' => 4
+                'value' => 4,
+                'as' => 'hemoglobin'
             ],
             [
                 'name' => 'imt',
-                'value' => 3
+                'value' => 3,
+                'as' => 'indek massa tubuh'
             ],
             [
                 'name' => 'lila',
-                'value' => 2
+                'value' => 2,
+                'as' => 'lingkar langan atas'
             ],
             [
                 'name' => 'merokok',
-                'value' => 1
+                'value' => 1,
+                'as' => 'merokok'
             ],
         ]);
     }

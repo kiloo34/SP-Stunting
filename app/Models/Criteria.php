@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Criteria extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'id';
+
+    protected $fillable = [
+        'name',
+        'value',
+        'as',
+    ];
 }

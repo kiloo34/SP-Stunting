@@ -53,24 +53,30 @@
             url: url,
             success: function (response) {
                 jQuery.each(response.data, function(index, itemData) {
-                    console.log(itemData.value);
+                    console.log(itemData.catin);
+                    
+                    var id = itemData.catin.id
+                    var url = '{{ route("penyuluh.catin.show", ':id') }}'
+                    url = url.replace(':id', id)
+
                     html += '<div class="col-md-4">'
                     html += '<div class="card card-widget widget-user-2">'
                     html += '<div class="widget-user-header bg-light">'
                     html += '<div class="widget-user-image">'
-                    // html += '<img class="img-circle elevation-2" src="{{ asset("assets/img/user7-128x128.jpg") }}" alt="User Avatar">'
                     html += '<h1>'+(index+1)+'</h1>'
                     html += '</div>'
+                    html += '<a href='+url+' type="button" class="">'
                     html += '<h3 class="widget-user-username">'+itemData.catin.name+'</h3>'
-                    html += '<h5 class="widget-user-desc">'+itemData.catin.desa+'</h5>'
-                    html += '<h5 class="widget-user-desc"> Nilai : '+itemData.value+'</h5>'
+                    html += '</a>'
+                    // html += '<h5 class="widget-user-desc">'+itemData.catin.desa+'</h5>'
+                    // html += '<h5 class="widget-user-desc"> Nilai : '+itemData.value+'</h5>'
 
                     if (itemData.value > 0.8) {
-                        html += '<h5 class="widget-user-desc text-danger"> Perlu Intensitas Pendampingan Tinggi </h5>';
+                        html += '<h5 class="widget-user-desc text-danger"> Perlu Pendampingan Intensitas Tinggi </h5>';
                     } else if (itemData.value >= 0.4 && itemData.value <= 0.8) {
-                        html += '<h5 class="widget-user-desc text-warning"> Perlu Intensitas Pendampingan Sedang </h5>';
+                        html += '<h5 class="widget-user-desc text-warning"> Perlu Pendampingan Intensitas Sedang </h5>';
                     } else {
-                        html += '<h5 class="widget-user-desc text-primary"> Perlu Intensitas Pendampingan Rendah </h5>';
+                        html += '<h5 class="widget-user-desc text-primary"> Perlu Pendampingan Intensitas Rendah </h5>';
                     }
 
                     html += '</div>'

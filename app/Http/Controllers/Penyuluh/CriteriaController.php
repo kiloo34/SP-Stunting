@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Penyuluh;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Penyuluh\CriteriaRequest;
 use App\Models\Criteria;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -30,7 +31,11 @@ class CriteriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('penyuluh.criteria.create', [
+            'title' => 'criteria',
+            'subtitle' => '',
+            'active' => 'criteria',
+        ]);
     }
 
     /**
@@ -39,9 +44,17 @@ class CriteriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CriteriaRequest $request)
     {
-        //
+        $criteria = new Criteria;
+        
+        $criteria->name = $request->name;
+        $criteria->as = $request->as;
+        $criteria->value = $request->value;
+
+        $criteria->save();
+
+        return redirect()->route('penyuluh.criteria.index')->with('success', 'Data Kriteria ' . $request->name .' berhasil ditambah');
     }
 
     /**
@@ -50,9 +63,14 @@ class CriteriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Criteria $criterion)
     {
-        //
+        return view('penyuluh.criteria.show', [
+            'title' => 'criteria',
+            'subtitle' => 'show',
+            'criteria' => $criterion,
+            'active' => 'criteria',
+        ]);
     }
 
     /**
@@ -61,9 +79,14 @@ class CriteriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Criteria $criterion)
     {
-        //
+        return view('penyuluh.criteria.edit', [
+            'title' => 'criteria',
+            'subtitle' => 'edit',
+            'criteria' => $criterion,
+            'active' => 'criteria',
+        ]);
     }
 
     /**
@@ -73,9 +96,16 @@ class CriteriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CriteriaRequest $request, Criteria $criterion)
     {
-        //
+        Criteria::where('id', $criterion->id)
+            ->update([
+                'name' => $request->name,
+                'as' => $request->as,
+                'value' => $request->value,
+            ]);
+
+        return redirect()->route('penyuluh.criteria.index')->with('success', 'Data Kriteria berhasil di update');
     }
 
     /**
@@ -122,10 +152,10 @@ class CriteriaController extends Controller
                 ->addColumn('action', function($row){
                     $actionBtn = '
                         <div class="btn-group btn-group-sm">
-                            <a href="#" class="btn btn-info">
+                            <a href="'.route("penyuluh.criteria.show", $row->id).'" class="btn btn-info">
                                 <i class="fas fa-eye"></i>
                             </a>
-                            <a href="#" class="btn btn-primary">
+                            <a href="'.route("penyuluh.criteria.edit", $row->id).'" class="btn btn-primary">
                                 <i class="fas fa-edit"></i>
                             </a>
                             <a href="#" class="btn btn-danger">

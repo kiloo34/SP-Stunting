@@ -66,5 +66,46 @@
                 ]
             });
         });
+
+        function updateToActive(id) {
+            var catin_id = id
+            console.log(catin_id)
+            var url = '{{ route("penyuluh.updateToActive", ':catin') }}';
+            url = url.replace(':catin', catin_id)
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                data: {'_method':'PUT', "_token": "{{ csrf_token() }}",},
+                success: function(data) {
+                    alert(data.data);
+                    console.log(data);
+                    reloadTable('#catin_table', 100);
+                }
+            });
+        }
+
+        function updateToDisable(id) {
+            var catin_id = id
+            console.log(catin_id)
+            var url = '{{ route("penyuluh.updateToDisable", ':catin') }}';
+            url = url.replace(':catin', catin_id)
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                data: {'_method':'PUT', "_token": "{{ csrf_token() }}",},
+                success: function(data) {
+                    alert(data.data);
+                    console.log(data);
+                    reloadTable('#catin_table', 100);
+                }
+            });
+        }
+
+        function reloadTable(selector, counter) {
+            setTimeout(function() {
+                $(selector).DataTable().ajax.reload();
+            }, 100);
+        }
+        
     </script>
 @endpush

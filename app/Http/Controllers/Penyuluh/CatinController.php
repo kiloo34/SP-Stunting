@@ -310,8 +310,17 @@ class CatinController extends Controller
                             <i class="fas fa-edit"></i>
                             Ubah tim
                         </a>';
-
+                    $d = '<a href="#" class="btn btn-sm btn-success" onclick="updateToActive('.$row->id.')">
+                        <i class="fas fa-edit"></i>
+                        Ubah ke Aktif
+                    </a>';
+                    $e = '<a href="#" class="btn btn-sm btn-danger" onclick="updateToDisable('.$row->id.')">
+                        <i class="fas fa-edit"></i>
+                        Ubah ke Non Aktif
+                    </a>';
+                    
                     $actionBtn = $row->team == null ? $a.$b : $c.$b;
+                    $this->statusCatinCheck($row) == true ? $actionBtn.=$e : $actionBtn.=$d;
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -367,5 +376,32 @@ class CatinController extends Controller
         } else {
             return response()->json(['text'=>'only ajax request']);
         }
+    }
+
+    protected function statusCatinCheck($catin)
+    {
+        return strtolower($catin->status_id) == 1 ? true : false;
+    }
+
+    public function updateToDisable(Catin $catin)
+    {
+        $catin->status_id = 2;
+        $catin->save();
+
+        return response()->json([
+            'text' => 'masuk sukses',
+            'message' => 'Berhasil merubah status ke Non Aktif'
+        ]);
+    }
+
+    public function updateToActive(Catin $catin)
+    {
+        $catin->status_id = 1;
+        $catin->save();
+
+        return response()->json([
+            'text' => 'masuk sukses',
+            'message' => 'Berhasil merubah status ke Aktif'
+        ]);
     }
 }

@@ -378,6 +378,20 @@ class CatinController extends Controller
         }
     }
 
+    public function countAge(Request $request)
+    {   
+        if($request->ajax()) {
+            $dateOfBirth = $request->date;
+            $today = date("d-m-Y");
+            $diff = date_diff(date_create($dateOfBirth), date_create($today));
+            return response()->json([
+                'data' => $diff->format('%y')
+            ]);
+        } else {
+            return response()->json(['text'=>'only ajax request']);
+        } 
+    }
+
     protected function statusCatinCheck($catin)
     {
         return strtolower($catin->status_id) == 1 ? true : false;

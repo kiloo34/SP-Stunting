@@ -25,36 +25,36 @@
                             @case($d->criteria->name == 'umur')
                                 <li class="list-group-item">
                                     <b>{{__('Umur')}}</b> <a class="float-right">{{$d->value}}</a>                                    
-                                    <br>
-                                    <b>{{__('Konversi')}}</b> <a class="float-right">{{$d->conversion}}</a>
+                                    {{-- <br> --}}
+                                    {{-- <b>{{__('Konversi')}}</b> <a class="float-right">{{$d->conversion}}</a> --}}
                                 </li> 
                                 @break
                             @case($d->criteria->name == 'hb')
                                 <li class="list-group-item">
                                     <b>{{__('HB')}}</b> <a class="float-right">{{$d->value}}</a>
-                                    <br>
-                                    <b>{{__('Konversi')}}</b> <a class="float-right">{{$d->conversion}}</a>
+                                    {{-- <br> --}}
+                                    {{-- <b>{{__('Konversi')}}</b> <a class="float-right">{{$d->conversion}}</a> --}}
                                 </li> 
                                 @break
                             @case($d->criteria->name == 'imt')
                                 <li class="list-group-item">
                                     <b>{{__('IMT')}}</b> <a class="float-right">{{$d->value}}</a>
-                                    <br>
-                                    <b>{{__('Konversi')}}</b> <a class="float-right">{{$d->conversion}}</a>
+                                    {{-- <br> --}}
+                                    {{-- <b>{{__('Konversi')}}</b> <a class="float-right">{{$d->conversion}}</a> --}}
                                 </li>
                                 @break
                             @case($d->criteria->name == 'lila')
                                 <li class="list-group-item">
                                     <b>{{__('LILA')}}</b> <a class="float-right">{{$d->value}}</a>
-                                    <br>
-                                    <b>{{__('Konversi')}}</b> <a class="float-right">{{$d->conversion}}</a>
+                                    {{-- <br> --}}
+                                    {{-- <b>{{__('Konversi')}}</b> <a class="float-right">{{$d->conversion}}</a> --}}
                                 </li>
                                 @break
                             @default
                                 <li class="list-group-item">
                                     <b>{{__('Merokok')}}</b> <a class="float-right">{{$d->value == 0 ? 'Tidak Terpapar' : 'Terpapar'}}</a>
-                                    <br>
-                                    <b>{{__('Konversi')}}</b> <a class="float-right">{{$d->conversion}}</a>
+                                    {{-- <br> --}}
+                                    {{-- <b>{{__('Konversi')}}</b> <a class="float-right">{{$d->conversion}}</a> --}}
                                 </li>
                         @endswitch
                     @endforeach

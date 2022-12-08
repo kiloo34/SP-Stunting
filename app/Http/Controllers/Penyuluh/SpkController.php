@@ -16,7 +16,7 @@ class SpkController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { // menampilkan halman
         $catin = $this->activeCatin();
         $count = $this->countCatinCriteria($catin->toArray());
 
@@ -32,10 +32,10 @@ class SpkController extends Controller
     {
         // if ($request->ajax()) {
             // $catin = $this->activeCatinWithRange(11);
-            $catin = $this->activeCatin();
-            $catinData = $this->getCatinidCriteria($catin->toArray());
+            $catin = $this->activeCatin(); // status active
+            $catinData = $this->getCatinidCriteria($catin->toArray()); // get data yang ada 
             $criteriaData = $this->getCatinCriteria($catin->toArray());
-            $criteria = $this->getCriteria();
+            $criteria = $this->getCriteria(); // kriteria
             $count = $this->countCatinCriteria($catin->toArray());
 
             // dump($catin);

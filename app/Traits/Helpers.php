@@ -52,7 +52,7 @@ trait Helpers {
     protected function imtCheck($value) {
         $res = '';
         switch ($value) {
-            case $value <= 16:
+            case $value < 17:
                 $res = 5;
                 break;
             
@@ -63,7 +63,7 @@ trait Helpers {
             case $value <= 25:
                 $res = 1;
                 break;
-                
+
             case $value <= 26:
                 $res = 2;
                 break;

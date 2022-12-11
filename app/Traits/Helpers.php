@@ -16,7 +16,7 @@ trait Helpers {
                 $res = 5;
                 break;
             
-            case $value >= 34:
+            case $value >= 35:
                 $res = 3;
                 break;
             
@@ -34,11 +34,11 @@ trait Helpers {
                 $res = 5;
                 break;
             
-            case $value >= 7 && $value <= 8.99:
-                $res = 3;
+            case $value <= 8.99:
+                $res = 4;
                 break;
             
-            case $value >= 9 && $value <= 10.99:
+            case $value <= 10.99:
                 $res = 3;
                 break;
             
@@ -56,16 +56,16 @@ trait Helpers {
                 $res = 5;
                 break;
             
-            case $value >= 17 && $value <= 18.4:
+            case $value <= 18.4:
                 $res = 4;
                 break;
             
-            case $value >= 25.1 && $value <= 26:
-                $res = 2;
-                break;
-            
-            case $value >= 18.5 && $value <= 25:
+            case $value <= 25:
                 $res = 1;
+                break;
+                
+            case $value <= 26:
+                $res = 2;
                 break;
             
             default:
@@ -82,7 +82,7 @@ trait Helpers {
                 $res = 5;
                 break;
             
-            case $value >= 18.5 && $value <= 23.4:
+            case $value <= 23.4:
                 $res = 3;
                 break;
             

@@ -418,4 +418,20 @@ class CatinController extends Controller
             'message' => 'Berhasil merubah status ke Aktif'
         ]);
     }
+
+    public function kriteriaVal()
+    {
+        $criteria = Criteria::all();
+        $catin = Catin::where('status_id', 1)->get();
+        $data = CatinCriteria::all();
+        
+        return view('penyuluh.catin.kriteriacatin', [
+            'title' => 'catin',
+            'subtitle' => '',
+            'criteria' => $criteria,
+            'catin' => $catin,
+            'data' => $data,
+            'active' => 'kriteriacatin',
+        ]);
+    }
 }

@@ -72,11 +72,25 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('penyuluh.catin.index') }}" class="nav-link {{ $active == 'catin' ? 'active' : '' }}">
+                <li class="nav-item {{ $active == 'catin' || $active == 'kriteriacatin' ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ $active == 'user' || $active == 'team' ? 'active' : '' }}">
                         <i class="nav-icon fas fa-users"></i>
-                        <p>{{__('Catin')}}</p>
+                        <p> {{__('Catin')}} <i class="fas fa-angle-right right"></i></p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('penyuluh.catin.index') }}" class="nav-link {{ $active == 'catin' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{__('Catin')}}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('penyuluh.kriteriaVal') }}" class="nav-link {{ $active == 'kriteriacatin' ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{__('Nilai Kriteria Catin')}}</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('penyuluh.criteria.index') }}" class="nav-link {{ $active == 'criteria' ? 'active' : '' }}">

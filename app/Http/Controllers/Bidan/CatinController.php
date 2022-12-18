@@ -5,12 +5,16 @@ namespace App\Http\Controllers\Bidan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Catin;
+use App\Models\CatinCriteria;
+use App\Models\Criteria;
 use App\Models\UserTeam;
+use App\Traits\Helpers;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 class CatinController extends Controller
 {
+    use Helpers;
     /**
      * Display a listing of the resource.
      *
@@ -97,7 +101,7 @@ class CatinController extends Controller
             $user = Auth::user();
             $in = UserTeam::where('user_id', $user->id)->pluck('team_id');
             $data = Catin::with('desa', 'status')
-                        ->whereIn('team_id', $in->toArray())
+                        // ->whereIn('team_id', $in->toArray())
                         ->get();
             
             return DataTables::of($data)
@@ -134,11 +138,10 @@ class CatinController extends Controller
                 })
                 ->addColumn('action', function($row){
                     $actionBtn = '
-                        <div class="btn-group btn-group-sm">
-                            <a href="#" class="btn btn-primary">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                        </div>';
+                        <a href="'.route("bidan.formValue", $row->id).'" class="btn btn-sm btn-primary">
+                            <i class="fas fa-plus"></i>
+                            Tambah Nilai
+                        </a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -146,5 +149,93 @@ class CatinController extends Controller
         } else {
             return response()->json(['text'=>'only ajax request']);
         }
+    }
+
+    public function formValue(Catin $catin)
+    {
+        $criterias = Criteria::all();
+        return view('bidan.catin.formvalue', [
+            'title' => 'catin',
+            'subtitle' => 'edit',
+            'catin' => $catin,
+            'criterias' => $criterias,
+            'active' => 'catin',
+        ]);
+    }
+    
+    public function countAge(Request $request)
+    {   
+        if($request->ajax()) {
+            $dateOfBirth = $request->date;
+            $today = date("d-m-Y");
+            $diff = date_diff(date_create($dateOfBirth), date_create($today));
+            return response()->json([
+                'data' => $diff->format('%y')
+            ]);
+        } else {
+            return response()->json(['text'=>'only ajax request']);
+        } 
+    }
+
+    public function storeValue(Request $request, Catin $catin)
+    {
+        $criterias = Criteria::all();
+
+        $name = $request->name;
+        $id = $request->id;
+
+        $msg = '';
+
+        if (count($name) == count($id)) {
+            for ($i=1; $i <= count($id); $i++) { 
+                $conversion = '';
+                if ($name[$i]) {
+                    switch ($criterias[$i-1]) {
+                        case $criterias[$i-1]->name == 'umur':
+                            $conversion = $this->ageCheck($name[$i]);
+                            break;
+                        
+                        case $criterias[$i-1]->name == 'hb':
+                            $conversion = $this->hbCheck($name[$i]);
+                            break;
+                        
+                        case $criterias[$i-1]->name == 'imt':
+                            $conversion = $this->imtCheck($name[$i]);
+                            break;
+                        
+                        case $criterias[$i-1]->name == 'lila':
+                            $conversion = $this->lilaCheck($name[$i]);
+                            break;
+                        
+                        default:
+                            $conversion = $this->smokeCheck($name[$i]);
+                            break;
+                    }
+                    $this->storeDataCatinCriteria($catin->id, $id[$i], $name[$i], $conversion);
+                    $msg = 'Data Kriteria Calon Pengantin ' . $catin->name .' berhasil ditambah';
+                } 
+                else {
+                    $msg = "Form Harus Diisi";
+                    return redirect()->back()->with('error', $msg);            
+                }
+            }
+        } else {
+            $msg = 'Internal server error';
+        }
+        return redirect()->route('penyuluh.catin.index')->with('success', $msg);   
+    }
+
+    protected function storeDataCatinCriteria($catin, $criteria, $value, $conversion)
+    {
+        CatinCriteria::updateOrCreate(
+            [
+                'catin_id' => $catin,
+                'criteria_id' => $criteria,
+            ],
+            [
+                'value' => $value,
+                'conversion' => $conversion,
+            ]
+        );
     }
 }

@@ -126,8 +126,11 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('catin', BidanCatin::class, [
             'as' => 'bidan'
         ]);
+        Route::get('/catin/{catin}/value', [BidanCatin::class, 'formValue'])->name('bidan.formValue');
+        Route::post('/catin/{catin}/value', [BidanCatin::class, 'storeValue'])->name('bidan.catin.storeValue');
         // Data Route
         Route::get('ajax/catin', [BidanCatin::class, 'getDataCatin'])->name('bidan.getDataCatin');
+        Route::post('ajax/catin/umur', [BidanCatin::class, 'countAge'])->name('bidan.countAge');
 
         // Report Route
         // Basic Route

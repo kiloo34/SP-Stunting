@@ -23,15 +23,22 @@ class CatinRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name' => 'required|max:255',
             'nik' => 'required|integer|min:16',
-            'no_hp' => 'required|integer|min:10',
+            'no_hp' => 'required|numeric|min:10',
             'age' => 'required|integer',
             'alamat' => 'required',
-            'village' => 'required',
-            'status' => 'required',
+            'village_id' => 'required',
         ];
+
+        if ($this->getMethod() == 'POST') {
+            $rules += [
+                'status_id' => 'required',
+            ];
+        }
+
+        return $rules;
     }
 
     /**
@@ -51,8 +58,8 @@ class CatinRequest extends FormRequest
             'no_hp.integer' => 'Nomor Handphone Harus angka',
             'no_hp.min' => 'Nomor Handphone minimal 10 digit',
             'alamat.required' => 'Alamat tidak boleh kosong',
-            'village.required' => 'Desa tidak boleh kosong',
-            'status.required' => 'Status tidak boleh kosong',
+            'village_id.required' => 'Desa tidak boleh kosong',
+            'status_id.required' => 'Status tidak boleh kosong',
         ];
     }
 }

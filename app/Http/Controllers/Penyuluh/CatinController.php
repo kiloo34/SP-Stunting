@@ -116,9 +116,15 @@ class CatinController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CatinRequest $request, Catin $catin)
     {
-        //
+        $catin->fill($request->all());
+        if ($catin->isDirty()) {
+            $catin->save();
+            return redirect()->route('penyuluh.catin.index')->with('success', 'Data Calon Pengantin ' . $catin->name . ' berhasil dirubah');
+        } else {
+            return redirect()->route('penyuluh.catin.index')->with('success', 'Data Calon Pengantin tidak ada perubahan');
+        }
     }
 
     /**
@@ -330,12 +336,19 @@ class CatinController extends Controller
         }
     }
 
-    public function getDataCatinDesa(Request $request)
+    public function getDataCatinDesa(Request $request, Catin $catin)
     {
         if($request->ajax()) {
-            $data = Village::all();
+            if (isset($catin->id)) {
+                $data = Village::whereNotIn('id', array($catin->village_id))
+                ->get();
+            } else {
+                $data = Village::all();
+            }
             return response()->json([
-                'data' => $data
+                'data' => $data,
+                'catin_address_id' => isset($catin->id) ? $catin->desa->id : '',
+                'catin_address_name' => isset($catin->id) ? $catin->desa->name : ''
             ]);
         } else {
             return response()->json(['text'=>'only ajax request']);

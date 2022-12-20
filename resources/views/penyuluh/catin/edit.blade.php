@@ -8,10 +8,11 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
-                    {{ucfirst($subtitle)}} {{__('Data')}} {{ucfirst($title)}}
+                    {{ucfirst($subtitle)}} {{__('Data')}} {{ucfirst($title)}} {{ucfirst($catin->name)}}
                 </h3>
             </div>
-            <form action="#" class="form-horizontal" method="post">
+            <form action="{{ route('penyuluh.catin.update', $catin->id) }}" class="form-horizontal" method="post">
+                @method('PUT')
                 @csrf
                 <div class="card-body">
                     <div class="form-group row">
@@ -61,7 +62,7 @@
                     <div class="form-group row">
                         <label for="catinAlamat" class="col-sm-2 col-form-label">{{__('Alamat')}}</label>
                         <div class="col-sm-10">
-                            <textarea name="alamat" id="catinAlamat" class="form-control @error('alamat') is-invalid @enderror" rows="5" value="{{ $catin->address }}"></textarea>
+                            <textarea name="alamat" id="catinAlamat" class="form-control @error('alamat') is-invalid @enderror" rows="5">{{$catin->address}}</textarea>
                             @error('alamat')
                             <span class="error invalid-feedback">
                                 <strong>{{ $message }}</strong>
@@ -72,7 +73,7 @@
                     <div class="form-group row">
                         <label for="catinDesa" class="col-sm-2 col-form-label">{{__('Desa')}}</label>
                         <div class="col-sm-10">
-                            <select name="village" class="form-control @error('village') is-invalid @enderror" id="catinDesa" disabled></select>
+                            <select name="village_id" class="form-control @error('village') is-invalid @enderror" id="catinDesa"></select>
                             @error('village')
                             <span class="error invalid-feedback">
                                 <strong>{{ $message }}</strong>
@@ -94,7 +95,7 @@
                 </div>
                 <div class="card-footer">
                     <a href="{{ route('penyuluh.catin.index') }}" class="btn btn-danger btn-sm">Kembali</a>
-                    <button type="submit" class="btn btn-success btn-sm float-right">{{__('Tambah Data')}}</button>
+                    <button type="submit" class="btn btn-success btn-sm float-right">{{__('Ubah Data')}}</button>
                 </div>
             </form>
         </div>
@@ -109,10 +110,12 @@
     })
 
     function getDataVillage() {
-        var url = '{{ route("penyuluh.getDataCatinDesa") }}';
+        var catin = '{{ $catin->id }}';
+        var url = '{{ route("penyuluh.getDataCatinDesa", ':catin') }}';
+        url = url.replace(':catin', catin);
         $.get(url, function(data) {
             var select = $('#catinDesa');
-            select.append('<option value="">Pilih Desa</option>')
+            select.append('<option value="'+data.catin_address_id+'">'+data.catin_address_name+'</option>')
             $.each(data.data, function(key, value) {
                 select.append('<option value=' + value.id + '>' + value.name + '</option>');
             });

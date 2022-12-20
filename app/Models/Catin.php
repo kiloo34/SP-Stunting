@@ -19,7 +19,7 @@ class Catin extends Model
         'age',
         'address',
         'status_id',
-        // 'village_id'
+        'village_id'
     ];
 
     /**

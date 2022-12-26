@@ -72,7 +72,7 @@
                     <div class="form-group row">
                         <label for="catinDesa" class="col-sm-2 col-form-label">{{__('Desa')}}</label>
                         <div class="col-sm-10">
-                            <select name="village" class="form-control @error('village') is-invalid @enderror" id="catinDesa"></select>
+                            <select name="village_id" class="form-control @error('village') is-invalid @enderror" id="catinDesa"></select>
                             @error('village')
                             <span class="error invalid-feedback">
                                 <strong>{{ $message }}</strong>
@@ -83,7 +83,7 @@
                     <div class="form-group row">
                         <label for="catinStatus" class="col-sm-2 col-form-label">{{__('Status')}}</label>
                         <div class="col-sm-10">
-                            <select name="status" class="form-control @error('status') is-invalid @enderror" id="catinStatus"></select>
+                            <select name="status_id" class="form-control @error('status') is-invalid @enderror" id="catinStatus"></select>
                             @error('status')
                             <span class="error invalid-feedback">
                                 <strong>{{ $message }}</strong>
@@ -109,7 +109,9 @@
     })
 
     function getDataVillage() {
-        var url = '{{ route("penyuluh.getDataCatinDesa") }}';
+        var catin = '?';
+        var url = '{{ route("penyuluh.getDataCatinDesa", ':catin') }}';
+        url = url.replace(':catin', catin);
         $.get(url, function(data) {
             var select = $('#catinDesa');
             select.append('<option value="">Pilih Desa</option>')

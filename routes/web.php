@@ -14,6 +14,7 @@ use App\Http\Controllers\Penyuluh\SpkController as PenyuluhSpk;
 // Bidan
 use App\Http\Controllers\Bidan\DashboardController as BidanDashboard;
 use App\Http\Controllers\Bidan\CatinController as BidanCatin;
+use App\Http\Controllers\Bidan\HistoryCriteriaCatinController as BidanHistoryCatin;
 use App\Http\Controllers\Bidan\ReportController as BidanReport;
 
 // PKK
@@ -131,6 +132,12 @@ Route::middleware(['auth'])->group(function () {
         // Data Route
         Route::get('ajax/catin', [BidanCatin::class, 'getDataCatin'])->name('bidan.getDataCatin');
         Route::post('ajax/catin/umur', [BidanCatin::class, 'countAge'])->name('bidan.countAge');
+
+        // History Criteria Route
+        // Basic Route
+        Route::get('/catin/{catin}/historyCriteria', [BidanHistoryCatin::class, 'index'])->name('bidan.historycriteria.index');
+        // Data Route
+        Route::get('/catin/{catin}/historyCriteria/getData', [BidanHistoryCatin::class, 'geAlltHistory'])->name('bidan.historycriteria.geAlltHistory');
 
         // Report Route
         // Basic Route

@@ -14,7 +14,7 @@ use App\Http\Requests\Penyuluh\CatinRequest;
 use App\Http\Requests\Penyuluh\CatinTeamRequest;
 use App\Models\CatinCriteria;
 use App\Models\Criteria;
-
+use App\Models\HistoryCatinCriteria;
 use App\Traits\Helpers;
 
 use Yajra\DataTables\DataTables;
@@ -237,6 +237,12 @@ class CatinController extends Controller
                 'conversion' => $conversion,
             ]
         );
+        HistoryCatinCriteria::create([
+            'catin_id' => $catin,
+            'criteria_id' => $criteria,
+            'value' => $value,
+            'conversion' => $conversion,
+        ]);
     }
 
     public function getDataCatin(Request $request)

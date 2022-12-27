@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Catin;
 use App\Models\CatinCriteria;
 use App\Models\Criteria;
+use App\Models\HistoryCatinCriteria;
 use App\Models\UserTeam;
 use App\Traits\Helpers;
 use Illuminate\Support\Facades\Auth;
@@ -141,6 +142,10 @@ class CatinController extends Controller
                         <a href="'.route("bidan.formValue", $row->id).'" class="btn btn-sm btn-primary">
                             <i class="fas fa-plus"></i>
                             Tambah Nilai
+                        </a>
+                        <a href="'.route("bidan.historycriteria.index", $row->id).'" class="btn btn-sm btn-info">
+                            <i class="fas fa-search"></i>
+                            History
                         </a>';
                     return $actionBtn;
                 })
@@ -237,5 +242,11 @@ class CatinController extends Controller
                 'conversion' => $conversion,
             ]
         );
+        HistoryCatinCriteria::create([
+            'catin_id' => $catin,
+            'criteria_id' => $criteria,
+            'value' => $value,
+            'conversion' => $conversion,
+        ]);
     }
 }

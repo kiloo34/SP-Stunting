@@ -65,8 +65,8 @@ class CatinController extends Controller
         $catin->no_hp = $request->no_hp;
         $catin->age = $request->age;
         $catin->address = $request->alamat;
-        $catin->village_id = $request->village;
-        $catin->status_id = $request->status;
+        $catin->village_id = $request->village_id;
+        $catin->status_id = $request->status_id;
         $catin->save();
 
         // Catin::create($request->all());

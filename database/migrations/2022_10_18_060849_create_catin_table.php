@@ -23,7 +23,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('village_id');
             $table->unsignedBigInteger('status_id');
-            $table->unsignedBigInteger('team_id');
+            $table->unsignedBigInteger('team_id')->nullable();
 
             $table->foreign('village_id')->references('id')->on('villages');
             $table->foreign('status_id')->references('id')->on('catin_statuses');

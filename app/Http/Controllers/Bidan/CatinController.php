@@ -227,7 +227,7 @@ class CatinController extends Controller
         } else {
             $msg = 'Internal server error';
         }
-        return redirect()->route('penyuluh.catin.index')->with('success', $msg);   
+        return redirect()->route('bidan.catin.index')->with('success', $msg);   
     }
 
     protected function storeDataCatinCriteria($catin, $criteria, $value, $conversion)
